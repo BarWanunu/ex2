@@ -5,7 +5,7 @@
     color:black;
     float:left;
     border-radius: 10px;
-    width: 200px;
+    width: 400px;
 
 }
 post{
@@ -15,4 +15,21 @@ post{
     color:black;
     width: 2000px;
 
+}
+.icons-container{
+    list-style-type: none;
+
+}
+li{
+    display: inline-block;
+    margin: 0 10px;
+}
+.comments{
+    background-color: rgb(186, 185, 185);
+    border-radius: 5px;
+    width: 200px;
+
+}
+ul{
+    padding-inline-start: 0px;
 }
