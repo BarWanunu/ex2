@@ -1,7 +1,7 @@
 .postdesign{
     padding: 10px;
     margin: 5px;
-    background-color: rgb(226, 225, 230);
+    background-color: rgb(235, 235, 239);
     color:black;
     float:left;
     border-radius: 10px;
@@ -11,7 +11,7 @@
 post{
     padding: 10px;
     margin: 5px;
-    background-color: rgba(209, 207, 212, 0.863);
+    background-color: rgb(235, 235, 239);
     color:black;
     width: 2000px;
 
@@ -25,7 +25,7 @@ li{
     margin: 0 10px;
 }
 .comments{
-    background-color: rgb(186, 185, 185);
+    background-color: rgb(226, 225, 230);
     border-radius: 5px;
     width: 200px;
 
