@@ -22,9 +22,9 @@ function Home(){
             <div className="row align-items-center">
               <div className="col-3 d-flex justify-content-between align-items-center"> 
                 <i className="bi bi-facebook custom-facebook-icon" style={{ marginRight: '8px', color: 'blue' }}></i>
-                <div className="input-group flex-nowrap">
+                <div className="input-group   flex-nowrap">
                     <span className="input-group-text" id="addon-wrapping"><i className="bi bi-search"></i></span>
-                    <input type="text" className="form-control" placeholder="Search Facebook" aria-label="Username" aria-describedby="addon-wrapping" style={{ paddingTop: '10px', paddingBottom: '10px', fontSize: '22px' }} />
+                    <input type="text" className="form-control" placeholder="Search Facebook" aria-label="Username" aria-describedby="addon-wrapping" style={{ paddingTop: '8px', paddingBottom: '8px', fontSize: '15px' }} />
                 </div>
               </div>
               <div className="col-6 custom-middle-icons">
@@ -50,16 +50,16 @@ function Home(){
               </div>
               <div className="col-3 d-flex justify-content-end">
                 <div className="gray-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Menu">
-                    <i className="bi bi-three-dots" style={{ color: 'black', fontSize: 50 }}></i>
+                    <i className="bi bi-three-dots" style={{ color: 'black', fontSize: 40 }}></i>
                 </div>
                 <div className="gray-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Messenger">
-                    <i className="bi bi-chat-dots" style={{ color: 'black', fontSize: 35 }}></i>
+                    <i className="bi bi-chat-dots" style={{ color: 'black', fontSize: 25 }}></i>
                 </div>
                 <div className="gray-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Notifications">
-                    <i className="bi bi-bell-fill" style={{ color: 'black', fontSize: 35 }}></i>
+                    <i className="bi bi-bell-fill" style={{ color: 'black', fontSize: 25 }}></i>
                 </div>
                 <div className="gray-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Account">
-                    <i className="bi bi-person-circle" style={{ color: 'black', fontSize: 35 }}></i>
+                    <i className="bi bi-person-circle" style={{ color: 'black', fontSize: 25 }}></i>
                 </div>
               </div>
             </div>
