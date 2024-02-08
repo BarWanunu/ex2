@@ -1,17 +1,22 @@
+:root {
+    --post-backgraud-color:rgba(240, 239, 239, 0.676); /* Define a CSS variable --comment-color and set its value to red */
+  }
+  
 .postdesign{
     padding: 10px;
     margin: 5px;
-    background-color: rgb(241, 241, 241);
+    background-color: var(--post-backgraud-color);
     color:black;
     float:left;
     border-radius: 10px;
-    width: 500px;
+    width: 600px;
+    position: relative;
 
 }
 post{
     padding: 10px;
     margin: 5px;
-    background-color: rgb(241, 241, 241);
+    background-color:var(--post-backgraud-color);
     color:black;
     width: 2000px;
 
@@ -25,16 +30,17 @@ li{
     
 }
 .comments{
-    background-color: rgb(241, 241, 241);
+    background-color: var(--post-backgraud-color);
     border-radius: 5px;
-    width: 200px;
+    width: 300px;
+    text-align: left; 
 
 }
 ul{
     padding-inline-start: 0px;
 }
 .action_list li {
-    background-color: rgb(241, 241, 241); /* Set the border style, size, and color */
+    background-color: var(--post-backgraud-color); /* Set the border style, size, and color */
     width: 130px;
     border-radius: 10px;
     align-items: center; /* Center vertically */
@@ -49,9 +55,29 @@ ul{
 }
 .input_comments{
     border: 1px solid #b3acac; /* Set the border style, size, and color */
-    width: 370px;
+    width: 450px;
     border-radius: 10px;
-    height: 20px;
+    height: 30px;
     
 
 }
+
+.bi-three-dots {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    cursor: pointer;
+  }
+  .tooltip {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 10px;;
+    border-radius: 5px;
+    font-size: 0.8em;
+    color: #333;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it's above other elements */
+    display: none;
+  }

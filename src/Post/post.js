@@ -1,90 +1,45 @@
-import './post.css'
+// Post.js
 import React, { useState } from 'react';
-import { ReactComponent as LikeIcon } from './svgimg/like.svg';
+import LikeButton from './LikeButton';
+import CommentInput from './CommentInput';
+import CommentButton from './CommentButton';
+import ShareButton from './ShareButton';
 import { ReactComponent as ShareIcon } from './svgimg/share.svg';
-import { ReactComponent as CommentIcon } from './svgimg/comment.svg';
-import bootstrap from 'bootstrap'
-
-const LikeButton = ({ onClick }) => {
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
-
-  const handleLikeClick = () => {
-    if (liked) {
-      setLikes((prevLikes) => prevLikes - 1);
-    } else {
-      setLikes((prevLikes) => prevLikes + 1);
-    }
-    setLiked(!liked);
-    // Call the parent component's onClick function (if provided)
-    if (onClick) {
-      onClick(!liked);
-    }
-  };
-
-  return (
-    <li onClick={handleLikeClick} style={{ cursor: 'pointer' }}>
-      <LikeIcon width="25" height="25" />
-      <span>{likes} Like</span>
-    </li>
-  );
-};
-
-
-const CommentInput = ({ onSubmit }) => {
-  const [newComment, setNewComment] = useState('');
-
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    if (newComment.trim() !== '') {
-      onSubmit(newComment);
-      setNewComment('');
-    }
-  };
-
-  return (
-    <form onSubmit={handleCommentSubmit}>
-      <input
-      className='input_comments'
-        type="text"
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-        placeholder="Add a comment..."
-      />
-      {newComment.trim() !== '' && <button type="submit">Submit</button>}
-    </form>
-  );
-};
-
-const CommentButton = ({ onClick }) => {
-  const handleCommentClick = () => {
-    // Call the parent component's onClick function (if provided)
-    if (onClick) {
-      onClick();
-    }
-  };
-
-  return (
-    <li onClick={handleCommentClick} style={{ cursor: 'pointer' }}>
-      <CommentIcon width="25" height="25" />
-      <span>Comment</span>
-    </li>
-  );
-};
-
+import { Modal, Button } from 'react-bootstrap'; // Import Modal and Button from react-bootstrap
+import './post.css';
 
 function Post({ id, text, profile, date, img }) {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
+  const [showOptionsModal, setShowOptionsModal] = useState(false);
 
   const handleCommentClick = () => {
     setShowCommentInput(!showCommentInput);
   };
+  
 
   const handleCommentSubmit = (newComment) => {
     setComments((prevComments) => [...prevComments, newComment]);
-    
   };
+
+  const handleOptionsClick = () => {
+    setShowOptionsModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowOptionsModal(false);
+  };
+
+  const handleDelete = () => {
+    console.log('Delete option clicked'); // Placeholder, implement actual logic
+  };
+
+  const handleEdit = () => {
+    console.log('Edit option clicked'); // Placeholder, implement actual logic
+  };
+
+
+
 
   return (
     <article className='postdesign'>
@@ -96,31 +51,36 @@ function Post({ id, text, profile, date, img }) {
       <p>{text}</p>
       <ul className="icons-container action_list action_text ">
         <LikeButton />
-            <li>
-                <ShareIcon width="25" height="25" style={{ cursor: 'pointer' }} />
-                <span>Share</span>
-            </li>
-            <li>
-                <CommentButton onClick={handleCommentClick} />
-            </li>
-        
-        
+        <CommentButton onClick={handleCommentClick} />
+        <ShareButton/>
       </ul>
       {showCommentInput && <CommentInput onSubmit={handleCommentSubmit} />}
       {showCommentInput && (
-        <div>
+        <div className="comments-container">
           <strong>Comments:</strong>
           <ul>
             {comments.map((comment, index) => (
-              <li  className='comments' key={index}>{comment}</li>
+              <li className='comments' key={index}>{comment}</li>
             ))}
           </ul>
         </div>
       )}
-      <img src={img}/>
+      {img && <img src={img} alt={`Post ${id}`} />}
+      <i className="bi bi-three-dots" onClick={handleOptionsClick}></i>
+
+      {/* Modal for delete and edit options */}
+      <Modal show={showOptionsModal} onHide={handleModalClose} size="sm">
+        <Modal.Header closeButton>
+          <Modal.Title>Options</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Add your delete and edit options here */}
+          <Button variant="primary" onClick={handleDelete}>Delete</Button>
+          <Button variant="primary" onClick={handleEdit}>Edit</Button>
+        </Modal.Body>
+      </Modal>
     </article>
   );
 }
 
 export default Post;
-
