@@ -8,12 +8,6 @@ function App() {
     <div>
       <Home>
       </Home>
-      <Post
-        id="1"
-        text="hi"
-        profile="shaked"
-        date="20.1.24"
-      ></Post>
     </div>
   )
 
