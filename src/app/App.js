@@ -1,6 +1,6 @@
 
-import Home from './Home_page/home.js';
-import Post from './Post/post.js';
+import Home from '../Home_page/home.js';
+import Post from '../Post/post.js';
 
 
 function App() {
