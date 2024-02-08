@@ -10,7 +10,55 @@
     {
         "id":2,
         "text":"hi everyone!",
+        "profile":"itay chananel",
+        "date":"30.1.24",
+        "img":""
+
+    },
+    {
+        "id":3,
+        "text":"hi everyone!",
         "profile":"shaked gitta",
+        "date":"30.1.24",
+        "img":""
+
+    },
+    {
+        "id":4,
+        "text":"hi everyone!",
+        "profile":"itay chananel",
+        "date":"30.1.24",
+        "img":""
+
+    },
+    {
+        "id":5,
+        "text":"hi everyone!",
+        "profile":"shaked gitta",
+        "date":"30.1.24",
+        "img":""
+
+    },
+    {
+        "id":6,
+        "text":"hi everyone!",
+        "profile":"itay chananel",
+        "date":"30.1.24",
+        "img":""
+
+    },
+    {
+        "id":7,
+        "text":"hi everyone!",
+        "profile":"shaked gitta",
+        "date":"30.1.24",
+        "img":""
+
+    },
+    {
+        "id":8,
+        "text":"hi everyone!",
+        "profile":"itay chananel",
         "date":"30.1.24",
         "img":""
 
