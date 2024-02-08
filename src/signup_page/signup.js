@@ -31,6 +31,15 @@ function Signup() {
         alert('Form submitted successfully!');
     };
     return(
+    <div>
+        <div>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Home Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+        <link rel="stylesheet" href="signup.css" />
+      </div>
         <div className="container px-6 text-center form-container">
         <div className="row align-items-center">
             <div className="col">
@@ -58,12 +67,13 @@ function Signup() {
                     <label htmlFor="photoInput" className="form-label">Choose Your Profile Picture</label>
                 </div>
                 <div className="col-auto">
-                <button type="button" className="btn btn-primary mb-3" style={{ padding: '5px' }} onClick={handleSubmit}>ubmit</button>
+                <button type="button" className="btn btn-primary mb-3" style={{ padding: '5px' }} onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 );
 }
 
-export default signup;
+export default Signup;
