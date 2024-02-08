@@ -40,6 +40,7 @@ const CommentInput = ({ onSubmit }) => {
   return (
     <form onSubmit={handleCommentSubmit}>
       <input
+      className='input_comments'
         type="text"
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
@@ -77,15 +78,18 @@ function Post({ id, text, profile, date, img }) {
         <time>{date}</time>
       </span>
       <p>{text}</p>
-      <ul className="icons-container">
-            <li>
+      <ul className="icons-container action_list action_text ">
+            <li >
                  <LikeButton />
+                 <span>Like</span>
             </li>
             <li>
                 <ShareIcon width="25" height="25" style={{ cursor: 'pointer' }} />
+                <span>Share</span>
             </li>
             <li>
                 <CommentButton onClick={handleCommentClick} />
+                <span>Comment</span>
             </li>
         
         
@@ -101,6 +105,7 @@ function Post({ id, text, profile, date, img }) {
           </ul>
         </div>
       )}
+      <img src={img}/>
     </article>
   );
 }

@@ -1,7 +1,7 @@
 .postdesign{
     padding: 10px;
     margin: 5px;
-    background-color: rgb(235, 235, 239);
+    background-color: rgb(241, 241, 241);
     color:black;
     float:left;
     border-radius: 10px;
@@ -22,7 +22,7 @@ post{
 }
 li{
     display: inline-block;
-    margin: 0 10px;
+    
 }
 .comments{
     background-color: rgb(226, 225, 230);
@@ -32,4 +32,22 @@ li{
 }
 ul{
     padding-inline-start: 0px;
+}
+.action_list li {
+    border: 1px solid #b3acac; /* Set the border style, size, and color */
+    width: 130px;
+    border-radius: 10px;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+.action_text li span {
+    margin-left: 5px; /* Add some space between the icon and the text */
+}
+.input_comments{
+    border: 1px solid #b3acac; /* Set the border style, size, and color */
+    width: 370px;
+    border-radius: 10px;
+    height: 20px;
+    
+
 }
