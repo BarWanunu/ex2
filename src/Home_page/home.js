@@ -96,7 +96,7 @@ function Home(){
                   </li>
                 </ul>
               </div>
-              <div className="col-3">
+              <div className="col-7">
                 <div>
                   {
                     postsList.map((post) => 
