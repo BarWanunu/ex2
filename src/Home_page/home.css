@@ -5,7 +5,7 @@
   border-bottom-left-radius: 10px; /* Make bottom left corner circular */
   border-bottom-right-radius: 10px; /* Make bottom right corner circular */
   background-color: #f8f9fa;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .custom-left-menu:hover {
@@ -18,23 +18,23 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px; /* adjust height as needed */
+  height: 60px; /* adjust height as needed */
   background-color: #ffffff; /* light gray */
   border-bottom: 1px solid #ccc; /* border line */
   z-index: 1000; /* ensure it's above other content */
 }
 
 .content {
-  margin-top: 70px;
+  margin-top: 60px;
   background-color: #f8f9fa;
 }
 
 .custom-facebook-icon {
-  font-size: 3rem; /* Adjust the size as needed */
+  font-size: 2.6rem; /* Adjust the size as needed */
 }
 
 .custom-middle-icons {
-  font-size: 2.5rem; /* Adjust the size as needed */
+  font-size: 1.8rem; /* Adjust the size as needed */
 }
 
 .custom-middle-icons .col:hover {
@@ -50,8 +50,8 @@
 }
 
 .gray-circle {
-  width: 60px;
-  height: 60px;
+  width: 47px;
+  height: 45px;
   background-color: rgb(180, 180, 180);
   border-radius: 50%;
   display: flex;
