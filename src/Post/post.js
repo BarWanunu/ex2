@@ -65,6 +65,7 @@ function Post({ id, text, profile, date, img }) {
         <time>{date}</time>
       </span>
       <p>{postText}</p>
+      {img && <img src={img} alt={`Post ${id}`} />}
       <ul className="icons-container action_list action_text ">
         <LikeButton />
         <CommentButton onClick={handleCommentClick} />
@@ -81,7 +82,7 @@ function Post({ id, text, profile, date, img }) {
           </ul>
         </div>
       )}
-      {img && <img src={img} alt={`Post ${id}`} />}
+      
       <i className="bi bi-three-dots" onClick={handleOptionsClick}></i>
 
       {/* Modal for delete and edit options */}
