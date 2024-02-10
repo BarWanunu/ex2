@@ -1,65 +1,20 @@
-import './post.css'
+// Post.js
 import React, { useState } from 'react';
-import { ReactComponent as LikeIcon } from './svgimg/like.svg';
+import LikeButton from './LikeButton';
+import CommentInput from './CommentInput';
+import CommentButton from './CommentButton';
+import ShareButton from './ShareButton';
 import { ReactComponent as ShareIcon } from './svgimg/share.svg';
-import { ReactComponent as CommentIcon } from './svgimg/comment.svg';
-import bootstrap from 'bootstrap'
-
-const LikeButton = () => {
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
-
-  const handleLikeClick = () => {
-    if (liked) {
-      setLikes((prevLikes) => prevLikes - 1);
-    } else {
-      setLikes((prevLikes) => prevLikes + 1);
-    }
-    setLiked(!liked);
-  };
-
-  return (
-    <>
-      <LikeIcon width="25" height="25" onClick={handleLikeClick} style={{ cursor: 'pointer' }} />
-      <span>{likes} </span>
-    </>
-  );
-};
-
-const CommentInput = ({ onSubmit }) => {
-  const [newComment, setNewComment] = useState('');
-
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    if (newComment.trim() !== '') {
-      onSubmit(newComment);
-      setNewComment('');
-    }
-  };
-
-  return (
-    <form onSubmit={handleCommentSubmit}>
-      <input
-      className='input_comments'
-        type="text"
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-        placeholder="Add a comment..."
-      />
-      {newComment.trim() !== '' && <button type="submit">Submit</button>}
-    </form>
-  );
-};
-
-const CommentButton = ({ onClick }) => {
-  return (
-    <CommentIcon width="25" height="25" onClick={onClick} style={{ cursor: 'pointer' }} />
-  );
-};
+import { Modal, Button } from 'react-bootstrap';
+import './post.css';
 
 function Post({ id, text, profile, date, img }) {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
+  const [showOptionsModal, setShowOptionsModal] = useState(false);
+  const [editedText, setEditedText] = useState(text);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [postText, setPostText] = useState(text);
 
   const handleCommentClick = () => {
     setShowCommentInput(!showCommentInput);
@@ -67,7 +22,39 @@ function Post({ id, text, profile, date, img }) {
 
   const handleCommentSubmit = (newComment) => {
     setComments((prevComments) => [...prevComments, newComment]);
-    
+  };
+
+  const handleOptionsClick = () => {
+    setShowOptionsModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowOptionsModal(false);
+  };
+
+  const handleDelete = () => {
+    console.log('Delete option clicked'); // Placeholder, implement actual logic
+  };
+
+  const handleEdit = () => {
+    console.log('Edit option clicked'); // Placeholder, implement actual logic
+    setShowOptionsModal(false);
+    setShowEditModal(true);
+  };
+
+  const handleEditModalClose = () => {
+    setShowEditModal(false);
+    setEditedText(text); // Reset edited text when closing the edit modal
+  };
+
+  const handleSaveChanges = () => {
+    console.log('Save Changes clicked'); // Placeholder, implement actual logic
+    // Save changes and close the edit modal
+    setShowEditModal(false);
+    setPostText(editedText);
+    // Here, you can send the edited text to the server or update state as needed
+    // For now, let's just log the edited text
+    console.log('Edited text:', editedText);
   };
 
   return (
@@ -77,38 +64,58 @@ function Post({ id, text, profile, date, img }) {
         <br />
         <time>{date}</time>
       </span>
-      <p>{text}</p>
+      <p>{postText}</p>
       <ul className="icons-container action_list action_text ">
-            <li >
-                 <LikeButton />
-                 <span>Like</span>
-            </li>
-            <li>
-                <ShareIcon width="25" height="25" style={{ cursor: 'pointer' }} />
-                <span>Share</span>
-            </li>
-            <li>
-                <CommentButton onClick={handleCommentClick} />
-                <span>Comment</span>
-            </li>
-        
-        
+        <LikeButton />
+        <CommentButton onClick={handleCommentClick} />
+        <ShareButton />
       </ul>
       {showCommentInput && <CommentInput onSubmit={handleCommentSubmit} />}
       {showCommentInput && (
-        <div>
+        <div className="comments-container">
           <strong>Comments:</strong>
           <ul>
             {comments.map((comment, index) => (
-              <li  className='comments' key={index}>{comment}</li>
+              <li className='comments' key={index}>{comment}</li>
             ))}
           </ul>
         </div>
       )}
-      <img src={img}/>
+      {img && <img src={img} alt={`Post ${id}`} />}
+      <i className="bi bi-three-dots" onClick={handleOptionsClick}></i>
+
+      {/* Modal for delete and edit options */}
+      <Modal show={showOptionsModal} onHide={handleModalClose} size="sm">
+        <Modal.Header closeButton>
+          <Modal.Title>Options</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Add your delete and edit options here */}
+          <Button variant="primary" onClick={handleDelete}>Delete</Button>
+          <Button variant="primary" onClick={handleEdit}>Edit</Button>
+        </Modal.Body>
+      </Modal>
+
+      {/* Modal for editing text */}
+      <Modal show={showEditModal} onHide={handleEditModalClose} size="ml">
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Post Text</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Editable text area */}
+          <textarea
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+            rows="4"
+            cols="50"
+          />
+          <br />
+          {/* Save Changes button */}
+          <Button variant="primary" onClick={handleSaveChanges}>Save Changes</Button>
+        </Modal.Body>
+      </Modal>
     </article>
   );
 }
 
 export default Post;
-
