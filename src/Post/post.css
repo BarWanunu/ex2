@@ -1,5 +1,5 @@
 :root {
-    --post-backgraud-color:rgba(240, 239, 239, 0.676); /* Define a CSS variable --comment-color and set its value to red */
+    --post-backgraud-color:rgba(243, 243, 243, 0.728); /* Define a CSS variable --comment-color and set its value to red */
   }
   
 .postdesign{
@@ -62,8 +62,8 @@ ul{
 
 }
 
-.bi-three-dots {
-    position: absolute;
+dots-post {
+    position: absolute; 
     top: 10px; /* Adjust the top position as needed */
     right: 10px; /* Adjust the right position as needed */
     cursor: pointer;
@@ -80,4 +80,8 @@ ul{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     z-index: 1000; /* Ensure it's above other elements */
     display: none;
+  }
+  img{
+    width: 550px;
+    margin: 15px;
   }

@@ -8,7 +8,8 @@ import { ReactComponent as ShareIcon } from './svgimg/share.svg';
 import { Modal, Button } from 'react-bootstrap';
 import './post.css';
 
-function Post({ id, text, profile, date, img, onDelete }) {
+                                              //added this
+function Post({ id, text, profile, date, img, onDelete, onDelete }) {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
@@ -34,7 +35,7 @@ function Post({ id, text, profile, date, img, onDelete }) {
 
   const handleDelete = () => {
     console.log('Delete option clicked'); // Placeholder, implement actual logic
-    onDelete(id);
+    onDelete(id);   //added this
   };
 
   const handleEdit = () => {
@@ -66,6 +67,7 @@ function Post({ id, text, profile, date, img, onDelete }) {
         <time>{date}</time>
       </span>
       <p>{postText}</p>
+      {img && <img src={img} alt={`Post ${id}`} />}
       <ul className="icons-container action_list action_text ">
         <LikeButton />
         <CommentButton onClick={handleCommentClick} />
@@ -82,9 +84,7 @@ function Post({ id, text, profile, date, img, onDelete }) {
           </ul>
         </div>
       )}
-      {img && <img src={img} alt={`Post ${id}`} />}
-      <i className="bi bi-three-dots" onClick={handleOptionsClick}></i>
-
+      
       {/* Modal for delete and edit options */}
       <Modal show={showOptionsModal} onHide={handleModalClose} size="sm">
         <Modal.Header closeButton>
