@@ -8,7 +8,7 @@ import { ReactComponent as ShareIcon } from './svgimg/share.svg';
 import { Modal, Button } from 'react-bootstrap';
 import './post.css';
 
-function Post({ id, text, profile, date, img }) {
+function Post({ id, text, profile, date, img, onDelete }) {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
@@ -34,6 +34,7 @@ function Post({ id, text, profile, date, img }) {
 
   const handleDelete = () => {
     console.log('Delete option clicked'); // Placeholder, implement actual logic
+    onDelete(id);
   };
 
   const handleEdit = () => {
