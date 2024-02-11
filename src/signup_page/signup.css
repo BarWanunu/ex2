@@ -1,4 +1,4 @@
-.body {
+body {
     background-color: #f8f9fa !important;
     background-repeat: no-repeat;
     background-position: center center;
@@ -7,9 +7,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 20vh;
     margin: 0;
 }
+
+body.dark-mode {
+  background-color: #343a40 !important;
+  color: white;
+}
+
 .middle{
    vertical-align:middle;
     margin: 5px;
@@ -18,13 +24,13 @@
 .form-container {
   max-width: 400px;
   margin: auto;
-  height: 200vh;
+  height: 0vh;
 }
 
 .photo-upload {
   display: flex;
   flex-direction: column;
-align-items: center;
+  align-items: center;
   justify-content: center;
 }
 
@@ -32,6 +38,28 @@ align-items: center;
     margin-top: 10px;
 }
 
-.fomr text small{
-    color: rgb(205, 205, 205);
+#Dark {
+  background-color: #343a40;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  left: 90px;
+  
+}
+
+#Light {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  left: 20px;
+  order: 1;
+  margin-left: 10px; /* Adjust as needed */
+}
+
+.hidden{
+  display: none;
 }
