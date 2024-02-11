@@ -2,21 +2,12 @@ import React, {useState, useEffect} from 'react';
 import './signup.css';
 import facebook from './facebook.svg';
 
-function Signup() {
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const toggleDarkMode = () => {
-            setIsDarkMode((prevMode) => !prevMode);
-    };
-        useEffect(() => {
-            document.body.classList.toggle('dark-mode', isDarkMode);
-          }, [isDarkMode]);
-          
-        
-    const handleSubmit = () => {
+function Signup() { 
+       const handleSubmit = () => {
         const emailInput = document.getElementById('exampleFormControlInput1');
         const passwordInput = document.getElementById('inputPassword5');
         const confirmPasswordInput = document.getElementById('floatingPassword');
-        const nameInput = document.getElementById('displayName');
+        const nameInput = document.getElementById('displayNameInput');
         const photoInput = document.getElementById('photoInput');
 
         // Check if email is in the correct format
@@ -39,19 +30,31 @@ function Signup() {
             return;
         }
 
-        if(nameInput.value == '') {
-        alert('Please enter a valid name');
-        return;
+        // Check if display name is not empty
+        if (nameInput.value == '') {
+            alert('Please enter a display name');
+            return;
         }
 
-        if(photoInput.value == '') {
-        alert('Please upload a profile picture');
-        return;
+        // Check if photo is uploaded
+        if (photoInput.value == '') {
+            alert('Please upload a profile picture');
+            return;
         }
-
+        
         // Perform additional actions or submit the form if everything is valid
         alert('Form submitted successfully!');
     };
+
+        
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const toggleDarkMode = () => {
+            setIsDarkMode((prevMode) => !prevMode);
+    };
+        useEffect(() => {
+            document.body.classList.toggle('dark-mode', isDarkMode);
+          }, [isDarkMode]);
+
     return(
     <div>
         <div>
@@ -89,10 +92,11 @@ function Signup() {
                     <input type="password" className="form-control" id="floatingPassword" placeholder="Confirm Password" />
                     <label htmlFor="passwordVerification" className="form-label"></label>
                 </div>
-                <div id="displayName" className="form-text mb-3">
-                <input type="text" className="form-control" id="displayName" placeholder="Display Name" required/>
-                    <label htmlFor="displayName" className="form-label"></label>
+                <div className="form-text mb-3">
+                    <input type="text" className="form-control" id="displayNameInput" placeholder="Display Name"/>
+                    <label htmlFor="displayNameInput" className="form-label"></label>
                 </div>
+
                 <div className="photo-upload mb-3">
                     <input type="file" className="form-control" id="photoInput" accept="image/*" />
                     <label htmlFor="photoInput" className="form-label">Choose Your Profile Picture</label>
