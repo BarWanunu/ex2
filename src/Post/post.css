@@ -62,10 +62,10 @@ ul{
 
 }
 
-dots-post {
-    position: absolute; 
-    top: 10px; /* Adjust the top position as needed */
-    right: 10px; /* Adjust the right position as needed */
+.dots-post {
+    position: absolute !important;
+    top: 10px !important; /* Adjust the top position as needed */
+    right: 10px !important; /* Adjust the right position as needed */
     cursor: pointer;
   }
   .tooltip {

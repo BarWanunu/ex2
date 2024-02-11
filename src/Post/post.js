@@ -84,7 +84,10 @@ function Post({ id, text, profile, date, img, onDelete }) {
           </ul>
         </div>
       )}
-      
+     {img && <img src={img} alt={`Post ${id}`} />}
+
+      <i className="bi bi-three-dots dots-post" onClick={handleOptionsClick}></i>
+
       {/* Modal for delete and edit options */}
       <Modal show={showOptionsModal} onHide={handleModalClose} size="sm">
         <Modal.Header closeButton>
