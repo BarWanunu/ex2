@@ -7,24 +7,42 @@ function Content() {
   const [postsList, setPostList] = useState(posts);
   const [newPostText, setNewPostText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [currentPostId, setCurrentPostId] = useState(11);
 
+  //adding a post
   const handleAddPost = () => {
+    console.log('You added a new post');
     if (newPostText.trim() !== '') {
+      //sets the date
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
       const newPost = {
-        id: postsList.length + 1,
+        id: currentPostId,
         text: newPostText,
         profile: "Your Profile",   // need to be changed it to the profile that connected
-        date: new Date().toISOString(), 
+        date: formattedDate, 
         img: selectedFile ? URL.createObjectURL(selectedFile) : null    
       };
       setPostList([...postsList, newPost]);
       setNewPostText('');
       setSelectedFile(null);
+      setCurrentPostId(currentPostId + 1);
     }
   };
 
+  //adding a picture to the post
   const handleFileChange = (event) => {
+    console.log('You added a picture to your post');
     setSelectedFile(event.target.files[0]);
+  };
+
+  //delete a post
+  const handleDeletePost = (postId) => {
+    setPostList(postsList.filter(post => post.id !== postId));
   };
 
   return(
@@ -47,9 +65,9 @@ function Content() {
                   <button onClick={handleAddPost} className="btn btn-primary">Add Post</button>
                 </div>
                   {
-                    postsList.map((post) => 
-                      <Post key={post.id} {...post} />
-                    )
+                    postsList.map((post) =>
+                    <Post key={post.id} {...post} onDelete={() => handleDeletePost(post.id)} />
+                  )
                   }
               </div>
               <div className="col-2">
