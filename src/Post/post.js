@@ -67,6 +67,7 @@ function Post({ id, text, profile, date, img, onDelete }) {
         <time>{date}</time>
       </span>
       <p>{postText}</p>
+      {img && <img src={img} alt={`Post ${id}`} />}
       <ul className="icons-container action_list action_text ">
         <LikeButton />
         <CommentButton onClick={handleCommentClick} />
@@ -83,9 +84,7 @@ function Post({ id, text, profile, date, img, onDelete }) {
           </ul>
         </div>
       )}
-      {img && <img src={img} alt={`Post ${id}`} />}
-      <i id="dots-post" className="bi bi-three-dots" onClick={handleOptionsClick}></i>
-
+      
       {/* Modal for delete and edit options */}
       <Modal show={showOptionsModal} onHide={handleModalClose} size="sm">
         <Modal.Header closeButton>
