@@ -9,7 +9,7 @@ import { Modal, Button } from 'react-bootstrap';
 import './post.css';
 
                                               //added this
-function Post({ id, text, profile, date, img, onDelete, onDelete }) {
+function Post({ id, text, profile, date, img, onDelete }) {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
