@@ -13,9 +13,16 @@ body {
 
 body.dark-mode {
   background-color: #343a40 !important;
-  color: white;
+  color: black;
 }
 
+.form-label-light {
+  color: black;
+}
+
+.form-label-dark {
+  color: white;
+}
 .middle{
    vertical-align:middle;
     margin: 5px;

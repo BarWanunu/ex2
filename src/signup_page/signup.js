@@ -80,13 +80,14 @@ function Signup() {
                 <div className='text-center'>
                 <div id="Email Address" className="form-text mb-3">
                     <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Email address" />
-                    <label htmlFor="exampleFormControlInput1" className="form-label"></label>
-                    <small>Your email address needs to be in the form of: name@example.com</small>
+                    <label htmlFor="exampleFormControlInput1" className={isDarkMode ? 'form-label-dark' : 'form-label-light'}> 
+                    Your email address needs to be in the form of: name@example.com</label>
+                   
                 </div>
                 <div id="passwordHelpBlock" className="form-text mb-3">
                     <input type="password" id="inputPassword5" className="form-control" aria-describedby="passwordHelpBlock" placeholder="Password" />
-                    <label htmlFor="inputPassword5" className="form-label"></label>
-                    <small>Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.</small>
+                    <label htmlFor="inputPassword5" className={isDarkMode ? 'form-label-dark' : 'form-label-light'}>
+                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.</label>
                 </div>
                 <div id="passwordVerification" className="form-text mb-3">
                     <input type="password" className="form-control" id="floatingPassword" placeholder="Confirm Password" />
@@ -99,7 +100,7 @@ function Signup() {
 
                 <div className="photo-upload mb-3">
                     <input type="file" className="form-control" id="photoInput" accept="image/*" />
-                    <label htmlFor="photoInput" className="form-label">Choose Your Profile Picture</label>
+                    <label htmlFor="photoInput" className={isDarkMode ? 'form-label-dark' : 'form-label-light'}>Choose Your Profile Picture</label>
                 </div>
                 <div className="col-auto">
                 <button type="button" className="btn btn-primary mb-3" style={{ padding: '5px' }} onClick={handleSubmit}>Submit</button>
