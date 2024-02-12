@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './signup.css';
-import facebook from './facebook.svg';
+import facebook from '../Facebook_images/facebook.svg';
+import white_facebook from '../Facebook_images/white_facebook.svg'
 
 function Signup() { 
        const handleSubmit = () => {
@@ -48,8 +49,8 @@ function Signup() {
 
         
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const toggleDarkMode = () => {
-            setIsDarkMode((prevMode) => !prevMode);
+    const toggleDarkMode = (isDark) => {
+        setIsDarkMode(isDark);
     };
         useEffect(() => {
             document.body.classList.toggle('dark-mode', isDarkMode);
@@ -65,11 +66,11 @@ function Signup() {
         <link rel="stylesheet" href="signup.css" />
     <div className="container px-6 text-center">
     
-    <img src={facebook} width={1} height={150}/>
-    <button type="button" id="Light" className={`btn btn-light ${isDarkMode ? 'active' : ''}`} onClick={toggleDarkMode}>
+    <img src={isDarkMode ? white_facebook : facebook} width={800} height={150}/>
+    <button type="button" id="Light" className={`btn btn-light ${isDarkMode ? 'active' : ''}`} onClick={() => toggleDarkMode(false)}>
             Light
           </button>
-          <button type="button" id="Dark" className={`btn btn-dark ${isDarkMode ? '' : 'active'}`} onClick={toggleDarkMode}>
+          <button type="button" id="Dark" className={`btn btn-dark ${isDarkMode ? '' : 'active'}`} onClick={() => toggleDarkMode(true)}>
             Dark
           </button>
       <div>

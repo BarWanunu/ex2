@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import './signin.css';
-import facebook from './facebook.svg';
+import facebook from '../Facebook_images/facebook.svg';
+import white_facebook from '../Facebook_images/white_facebook.svg'
 
 function Signin() {
 
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const toggleDarkMode = () => {
-            setIsDarkMode((prevMode) => !prevMode);
-    };
+    const toggleDarkMode = (isDark) => {
+      setIsDarkMode(isDark);
+  };
         useEffect(() => {
             document.body.classList.toggle('dark-mode', isDarkMode);
           }, [isDarkMode]);
@@ -27,10 +28,10 @@ function Signin() {
     <div className="row align-items-center">
       {/* Facebook Image on the Left */}
       <div className="col-4">
-        <img src={facebook} width={500} height={500} />
-        <button type="button" id="Light" className={`btn btn-light ${isDarkMode ? 'active' : ''}`} onClick={toggleDarkMode}>Light
+        <img src={isDarkMode ? white_facebook : facebook} width={500} height={500} />
+        <button type="button" id="Light" className={`btn btn-light ${isDarkMode ? 'active' : ''}`} onClick={() => toggleDarkMode(false)}>Light
     </button>
-    <button type="button" id="Dark" className={`btn btn-dark ${isDarkMode ? '' : 'active'}`} onClick={toggleDarkMode}>Dark
+    <button type="button" id="Dark" className={`btn btn-dark ${isDarkMode ? '' : 'active'}`} onClick={() => toggleDarkMode(true)}>Dark
     </button>
       </div>
       {/* Email/Password Form and Buttons on the Right */}
