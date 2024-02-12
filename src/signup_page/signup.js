@@ -56,23 +56,23 @@ function Signup() {
           }, [isDarkMode]);
 
     return(
-        <>
+        <div>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Sign up Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossOrigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
         <link rel="stylesheet" href="signup.css" />
-        <div className="col-4">
-    <img src={facebook} width={1400} height={150}/>
+    <div className="container px-6 text-center">
+    
+    <img src={facebook} width={1} height={150}/>
     <button type="button" id="Light" className={`btn btn-light ${isDarkMode ? 'active' : ''}`} onClick={toggleDarkMode}>
             Light
           </button>
           <button type="button" id="Dark" className={`btn btn-dark ${isDarkMode ? '' : 'active'}`} onClick={toggleDarkMode}>
             Dark
           </button>
-  </div>
-      </div>
+      <div>
         <div className="container px-6 text-center form-container">
         <div className="row align-items-center">
             <div className="col middle">
@@ -108,9 +108,10 @@ function Signup() {
             </div>
           </div>
         </div>
-      </>
-      
-);
-}
+        </div>
+        </div>
+      </div>
+)
+};
 
 export default Signup;
