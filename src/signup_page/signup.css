@@ -64,9 +64,5 @@ body.dark-mode {
   top: 5px;
   left: 20px;
   order: 1;
-  margin-left: 10px; /* Adjust as needed */
-}
-
-.hidden{
-  display: none;
+  margin-left: 10px;
 }
