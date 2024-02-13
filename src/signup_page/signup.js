@@ -1,9 +1,35 @@
 import React, {useState, useEffect} from 'react';
+import {BrowserRouter, useNavigate } from 'react-router-dom';
 import './signup.css';
 import facebook from '../Facebook_images/facebook.svg';
 import white_facebook from '../Facebook_images/white_facebook.svg'
 
 function Signup() { 
+
+    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+
+  const getUserFromLocalStorage = () => {
+    const userJSON = localStorage.getItem('user');
+    return userJSON ? JSON.parse(userJSON) : null;
+  };
+
+    useEffect(() => {
+    // Retrieve user details when the component mounts
+    const storedUser = getUserFromLocalStorage();
+    setUser(storedUser);
+      }, []);
+
+
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const toggleDarkMode = (isDark) => {
+        setIsDarkMode(isDark);
+    };
+    useEffect(() => {
+        document.body.classList.toggle('dark-mode', isDarkMode);
+    }, [isDarkMode]);
+
+
        const handleSubmit = () => {
         const emailInput = document.getElementById('exampleFormControlInput1');
         const passwordInput = document.getElementById('inputPassword5');
@@ -42,19 +68,25 @@ function Signup() {
             alert('Please upload a profile picture');
             return;
         }
+
+        // Assuming all validations passed, create a user object
+    const user = {
+        email: emailInput.value,
+        password: passwordInput.value,
+        name: nameInput.value,
+        photo: photoInput.value,
+    };
+
+    // Save user object to local storage
+    localStorage.setItem('user', JSON.stringify(user));
+
+    setUser(user);
         
         // Perform additional actions or submit the form if everything is valid
         alert('Form submitted successfully!');
-    };
 
-        
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const toggleDarkMode = (isDark) => {
-        setIsDarkMode(isDark);
+        navigate('/');
     };
-        useEffect(() => {
-            document.body.classList.toggle('dark-mode', isDarkMode);
-          }, [isDarkMode]);
 
     return(
         <div>

@@ -1,17 +1,37 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './signin.css';
 import facebook from '../Facebook_images/facebook.svg';
-import white_facebook from '../Facebook_images/white_facebook.svg'
+import white_facebook from '../Facebook_images/white_facebook.svg';
 
 function Signin() {
 
-    const [isDarkMode, setIsDarkMode] = useState(false);
+  const navigate = useNavigate();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
     const toggleDarkMode = (isDark) => {
       setIsDarkMode(isDark);
   };
         useEffect(() => {
             document.body.classList.toggle('dark-mode', isDarkMode);
           }, [isDarkMode]);
+    
+    const handleSingIn = () => {
+      const user = localStorage.getItem('user');
+      const displayName = document.getElementById('floatingInput').value;
+      const password = document.getElementById('floatingPassword').value;
+      if (user) {
+        const dataUser = JSON.parse(user);
+
+        if (dataUser.name === displayName && dataUser.password === password) {
+          alert('Login Success, welcome to Facebook!');
+          navigate('/home');
+        } else {
+          alert('Incorrect username or password. Please try again.');
+      } 
+     } 
+    };
+
     return(
         <>
   <meta charSet="utf-8" />
@@ -43,7 +63,7 @@ function Signin() {
                 id="floatingInput"
                 placeholder="name@example.com"
               />
-              <label htmlFor="floatingInput">Email address</label>
+              <label htmlFor="floatingInput">User Name</label>
             </div>
             <div className="form-floating">
               <input
@@ -56,8 +76,10 @@ function Signin() {
             </div>
           </div>
           <div className="col-8 mt-3">
-            <button type="submit" id="log-sign" className="btn btn-primary mb-3 mr-2">Log In</button>
-            <button type="submit" id="log-sign" className="btn btn-primary mb-3">Sign In</button>
+            <button type="submit" id="log-sign" className="btn btn-primary mb-3 mr-2" onClick={handleSingIn}>Log In</button>
+            <Link to="/signup" className="btn btn-primary mb-3">
+          Sign Up
+        </Link>
           </div>
           <div className="col-8 mt-3">
             <a href="#" className="link-primary">
