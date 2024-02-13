@@ -5,6 +5,8 @@ import CommentInput from './CommentInput';
 import CommentButton from './CommentButton';
 import ShareButton from './ShareButton';
 import { Modal, Button } from 'react-bootstrap';
+import PostOptions from './PostOptions';
+import CommentOptions from './CommentOptions'; 
 import './post.css';
 
                                               //added this
@@ -25,19 +27,24 @@ function Post({ id, text, profile, date, img, onDelete }) {
   const handleCommentSubmit = (newComment) => {
     setComments((prevComments) => [...prevComments, newComment]);
   };
-
-
-
-  const handleDelete = () => {
-    console.log('Delete option clicked'); // Placeholder, implement actual logic
-    onDelete(id);
-       
+  const handleDeleteComment = (index) => {
+    // Handle delete comment logic here
+    const updatedComments = [...comments];
+    updatedComments.splice(index, 1);
+    setComments(updatedComments);
   };
 
-  const handleEdit = () => {
-    console.log('Edit option clicked'); // Placeholder, implement actual logic
-    setShowOptionsModal(false);
-    setShowEditModal(true);
+  const handleEditComment = (index, editedText) => {
+    // Handle edit comment logic here
+    const updatedComments = [...comments];
+    updatedComments[index] = editedText;
+    setComments(updatedComments);
+  };
+
+
+  const handleEdit = (editedText, setPostText) => {
+    // Call setPostText to update the post text
+    setPostText(editedText);
   };
 
   const handleEditModalClose = () => {
@@ -62,8 +69,6 @@ function Post({ id, text, profile, date, img, onDelete }) {
 
   };
   
-
-
 
   return (
     <article className='postdesign bg-white p-4 rounded shadow mt-3'>
@@ -91,48 +96,22 @@ function Post({ id, text, profile, date, img, onDelete }) {
       </ul>
       {showCommentInput && <CommentInput onSubmit={handleCommentSubmit} />}
       {showCommentInput && (
-        <div className="comments-container">
+        <div className="comments-container ">
           <strong>Comments:</strong>
           <ul>
             {comments.map((comment, index) => (
-              <li className='comments' key={index}>{comment}</li>
+              <li key={index} className='comments'>
+                {comment}
+                <CommentOptions onDelete={() => handleDeleteComment(index)} onEdit={(editedText) => handleEditComment(index, editedText)} initialText={comment} setCommentText={() => {}} />
+              </li>
             ))}
           </ul>
         </div>
       )}
      {img && <img src={img} alt={`Post ${id}`} />}
+     <PostOptions onDelete={() => onDelete(id)} onEdit={handleEdit} initialText={text} setPostText={setPostText} />
 
-     <div>
-      <i className="bi bi-three-dots dots-post" onClick={handleOptionsClick}></i>
-
-      {showOptions && (
-        <div className="options-dropdown">
-          <ul class="list-group">
-            <li class="list-group-item" onClick={handleDelete}>Delete</li>
-            <li class="list-group-item" onClick={handleEdit}>Edit</li>
-          </ul>
-        </div>
-      )}
-    </div>
-
-      {/* Modal for editing text */}
-      <Modal show={showEditModal} onHide={handleEditModalClose} size="ml">
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Post Text</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Editable text area */}
-          <textarea
-            value={editedText}
-            onChange={(e) => setEditedText(e.target.value)}
-            rows="4"
-            cols="50"
-          />
-          <br />
-          {/* Save Changes button */}
-          <Button variant="primary" onClick={handleSaveChanges}>Save Changes</Button>
-        </Modal.Body>
-      </Modal>
+ 
     </article>
   );
 }
