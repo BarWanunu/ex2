@@ -1,11 +1,11 @@
 :root {
-    --post-backgraud-color:rgba(243, 243, 243, 0.728); /* Define a CSS variable --comment-color and set its value to red */
+    --post-backgraud-color:color:white; /* Define a CSS variable --comment-color and set its value to red */
   }
   
 .postdesign{
     padding: 10px;
     margin: 5px;
-    background-color: var(--post-backgraud-color);
+    background-color: white;
     color:black;
     float:left;
     border-radius: 10px;
@@ -64,8 +64,8 @@ ul{
 
 .dots-post {
     position: absolute !important;
-    top: 10px !important; /* Adjust the top position as needed */
-    right: 10px !important; /* Adjust the right position as needed */
+    top: 30px !important; /* Adjust the top position as needed */
+    right: 30px !important; /* Adjust the right position as needed */
     cursor: pointer;
   }
   .tooltip {
@@ -84,4 +84,30 @@ ul{
   img{
     width: 550px;
     margin: 15px;
+  }
+  .avatar_image{
+    width: 15px;
+     height: 15px;
+      object-fit: cover;
+  }
+  .options-container {
+    position: relative;
+    display: inline-block;
+  }
+  .options-dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute !important;
+    top: 46px !important; /* Adjust the top position as needed */
+    right: 30px !important; /* Adjust the right position as needed */
+    cursor: pointer;
+  }
+  
+  .options-dropdown li {
+    cursor: pointer;
+    padding: 8px;
+    &:hover {
+      background-color: #f1f1f1; 
+    }
   }

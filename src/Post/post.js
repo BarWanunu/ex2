@@ -4,7 +4,6 @@ import LikeButton from './LikeButton';
 import CommentInput from './CommentInput';
 import CommentButton from './CommentButton';
 import ShareButton from './ShareButton';
-import { ReactComponent as ShareIcon } from './svgimg/share.svg';
 import { Modal, Button } from 'react-bootstrap';
 import './post.css';
 
@@ -16,6 +15,8 @@ function Post({ id, text, profile, date, img, onDelete }) {
   const [editedText, setEditedText] = useState(text);
   const [showEditModal, setShowEditModal] = useState(false);
   const [postText, setPostText] = useState(text);
+  const [showOptions, setShowOptions] = useState(false);
+
 
   const handleCommentClick = () => {
     setShowCommentInput(!showCommentInput);
@@ -25,17 +26,12 @@ function Post({ id, text, profile, date, img, onDelete }) {
     setComments((prevComments) => [...prevComments, newComment]);
   };
 
-  const handleOptionsClick = () => {
-    setShowOptionsModal(true);
-  };
 
-  const handleModalClose = () => {
-    setShowOptionsModal(false);
-  };
 
   const handleDelete = () => {
     console.log('Delete option clicked'); // Placeholder, implement actual logic
-    onDelete(id);   //added this
+    onDelete(id);
+       
   };
 
   const handleEdit = () => {
@@ -48,6 +44,11 @@ function Post({ id, text, profile, date, img, onDelete }) {
     setShowEditModal(false);
     setEditedText(text); // Reset edited text when closing the edit modal
   };
+  const handleOptionsClick = () => {
+    setShowOptions(!showOptions);
+  };
+
+
 
   const handleSaveChanges = () => {
     console.log('Save Changes clicked'); // Placeholder, implement actual logic
@@ -57,18 +58,33 @@ function Post({ id, text, profile, date, img, onDelete }) {
     // Here, you can send the edited text to the server or update state as needed
     // For now, let's just log the edited text
     console.log('Edited text:', editedText);
+    
+
   };
+  
+
+
 
   return (
-    <article className='postdesign'>
-      <span>
+    <article className='postdesign bg-white p-4 rounded shadow mt-3'>
+      <span classname="d-flex justify-content-between">
+      <div class="d-flex">
+                  <img
+                    src=".\svgimg\Blank-Profile.jpg"
+                    alt="avatar"
+                    class="rounded-circle me-2 avatar_image"
+                    
+                  />
+                  
+      
         <b>{profile}&nbsp;</b>
+        </div>
         <br />
         <time>{date}</time>
       </span>
       <p>{postText}</p>
       {img && <img src={img} alt={`Post ${id}`} />}
-      <ul className="icons-container action_list action_text ">
+      <ul className="icons-container action_list action_text">
         <LikeButton />
         <CommentButton onClick={handleCommentClick} />
         <ShareButton />
@@ -86,19 +102,18 @@ function Post({ id, text, profile, date, img, onDelete }) {
       )}
      {img && <img src={img} alt={`Post ${id}`} />}
 
+     <div>
       <i className="bi bi-three-dots dots-post" onClick={handleOptionsClick}></i>
 
-      {/* Modal for delete and edit options */}
-      <Modal show={showOptionsModal} onHide={handleModalClose} size="sm">
-        <Modal.Header closeButton>
-          <Modal.Title>Options</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Add your delete and edit options here */}
-          <Button variant="primary" onClick={handleDelete}>Delete</Button>
-          <Button variant="primary" onClick={handleEdit}>Edit</Button>
-        </Modal.Body>
-      </Modal>
+      {showOptions && (
+        <div className="options-dropdown">
+          <ul class="list-group">
+            <li class="list-group-item" onClick={handleDelete}>Delete</li>
+            <li class="list-group-item" onClick={handleEdit}>Edit</li>
+          </ul>
+        </div>
+      )}
+    </div>
 
       {/* Modal for editing text */}
       <Modal show={showEditModal} onHide={handleEditModalClose} size="ml">

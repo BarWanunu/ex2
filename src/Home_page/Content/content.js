@@ -50,7 +50,8 @@ function Content() {
           <div className="container-fluid">
             <div className="row">
               <LeftMenu />
-              <div className="col-7">               
+              <div className="col-7"> 
+              <div class="bg-white p-3 mt-3 rounded border shadow">              
                 <div className="add-post-container">
                   <textarea
                     value={newPostText}
@@ -58,11 +59,13 @@ function Content() {
                     placeholder="What's on your mind?"
                     className="form-control"
                   />
+                  
                   <input
                     type="file"
                     onChange={handleFileChange}
                   />
                   <button onClick={handleAddPost} className="btn btn-primary">Add Post</button>
+                </div>
                 </div>
                   {
                     postsList.map((post) =>
