@@ -22,6 +22,7 @@ const CommentInput = ({ onSubmit }) => {
         placeholder="Add a comment..."
       />
       {newComment.trim() !== '' && <button type="submit">Submit</button>}
+      
     </form>
   );
 };
