@@ -2,6 +2,9 @@ function Right_icons(){
   return(
     <div className="col-3 d-flex justify-content-end">
       <div className="gray-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Menu">
+          <i className="bi bi-moon" style={{ color: 'black', fontSize: 40 }}></i>
+      </div>
+      <div className="gray-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Menu">
           <i className="bi bi-brightness-high" style={{ color: 'black', fontSize: 40 }}></i>
       </div>
       <div className="gray-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Menu">

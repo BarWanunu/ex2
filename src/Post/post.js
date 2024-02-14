@@ -8,9 +8,10 @@ import { Modal, Button } from 'react-bootstrap';
 import PostOptions from './PostOptions';
 import CommentOptions from './CommentOptions'; 
 import './post.css';
+import avatarImg from './svgimg/Blank-Profile.jpg';
 
                                               //added this
-function Post({ id, text, profile, date, img, onDelete }) {
+function Post({ id, text, profile, date, img, onDelete , profileimg}) {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
@@ -18,6 +19,12 @@ function Post({ id, text, profile, date, img, onDelete }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [postText, setPostText] = useState(text);
   const [showOptions, setShowOptions] = useState(false);
+  const user= localStorage.getItem('user');
+  const dataUser = JSON.parse(user);
+  const username= dataUser.name;
+  const profileimage=dataUser.photo;
+
+
 
 
   const handleCommentClick = () => {
@@ -25,6 +32,7 @@ function Post({ id, text, profile, date, img, onDelete }) {
   };
 
   const handleCommentSubmit = (newComment) => {
+    
     setComments((prevComments) => [...prevComments, newComment]);
   };
   const handleDeleteComment = (index) => {
@@ -75,14 +83,15 @@ function Post({ id, text, profile, date, img, onDelete }) {
       <span classname="d-flex justify-content-between">
       <div class="d-flex">
                   <img
-                    src=".\svgimg\Blank-Profile.jpg"
+                    src={profileimg || avatarImg}
                     alt="avatar"
-                    class="rounded-circle me-2 avatar_image"
+                    className="rounded-circle me-2 avatar_image"
                     
                   />
                   
       
         <b>{profile}&nbsp;</b>
+        <b>{profileimg}</b>
         </div>
         <br />
         <time>{date}</time>
@@ -100,15 +109,21 @@ function Post({ id, text, profile, date, img, onDelete }) {
           <strong>Comments:</strong>
           <ul>
             {comments.map((comment, index) => (
-              <li key={index} className='comments'>
-                {comment}
-                <CommentOptions onDelete={() => handleDeleteComment(index)} onEdit={(editedText) => handleEditComment(index, editedText)} initialText={comment} setCommentText={() => {}} />
-              </li>
+               <li key={index} className='comments'>
+               {comment}
+
+               <div>
+                        <b>{username}&nbsp;</b>
+                        
+                        <img src={profileimage} alt={''} 
+                        className="rounded-circle me-2 avatar_image"/>
+                    </div>
+               <CommentOptions onDelete={() => handleDeleteComment(index)} onEdit={(editedText) => handleEditComment(index, editedText)} initialText={comment} setCommentText={() => {}} />
+             </li>
             ))}
-          </ul>
+        </ul>
         </div>
       )}
-     {img && <img src={img} alt={`Post ${id}`} />}
      <PostOptions onDelete={() => onDelete(id)} onEdit={handleEdit} initialText={text} setPostText={setPostText} />
 
  

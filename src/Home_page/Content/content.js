@@ -8,6 +8,10 @@ function Content() {
   const [newPostText, setNewPostText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [currentPostId, setCurrentPostId] = useState(11);
+  const user= localStorage.getItem('user');
+  const dataUser = JSON.parse(user);
+  const username= dataUser.name;
+  const profileimage=dataUser.photo;
 
   //adding a post
   const handleAddPost = () => {
@@ -23,9 +27,10 @@ function Content() {
       const newPost = {
         id: currentPostId,
         text: newPostText,
-        profile: "Your Profile",   // need to be changed it to the profile that connected
+        profile: username,   // need to be changed it to the profile that connected
         date: formattedDate, 
-        img: selectedFile ? URL.createObjectURL(selectedFile) : null    
+        img: selectedFile ? URL.createObjectURL(selectedFile) : null ,
+        profileimg:profileimage
       };
       setPostList([...postsList, newPost]);
       setNewPostText('');

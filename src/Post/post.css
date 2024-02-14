@@ -33,9 +33,10 @@ li{
      background-color: #d8d9dbb0;
     border-radius: 5px;
     width: 450px;
-    height: 35px;
+    height: 40px;
     text-align: left;
     margin-bottom: 5px;
+    padding: 10px;
 
 }
 ul{
@@ -88,8 +89,13 @@ ul{
     margin: 15px;
   }
   .avatar_image{
-    width: 15px;
-     height: 15px;
+    width: 38px;
+     height:38px;
+      object-fit: cover;
+  }
+  .avatar_image_comment{
+    width: 20px;
+     height:20px;
       object-fit: cover;
   }
   .options-container {
