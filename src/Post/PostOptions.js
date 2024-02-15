@@ -50,9 +50,23 @@ function PostOptions({ onDelete, onEdit, initialText, setPostText }) {
         </div>
       )}
 
+
       {/* Modal for delete confirmation */}
       <Modal show={showDeleteConfirmation} onHide={handleCancelDelete} size="sm">
-        {/* ... (unchanged code) */}
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this comment?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCancelDelete}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDeleteConfirmation}>
+            Delete
+          </Button>
+        </Modal.Footer>
       </Modal>
 
       {/* Modal for editing text */}

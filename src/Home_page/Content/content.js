@@ -2,12 +2,17 @@ import { useState } from 'react';
 import Post from '../../Post/post.js';
 import posts from "../../data/postdb.json"
 import LeftMenu from './LeftMenu/leftMenu.js';
+import './content.css'
 
-function Content() {
+function Content({ isDarkMode }) {
   const [postsList, setPostList] = useState(posts);
   const [newPostText, setNewPostText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [currentPostId, setCurrentPostId] = useState(11);
+  const user= localStorage.getItem('user');
+  const dataUser = JSON.parse(user);
+  const username= dataUser.name;
+  const profileimage=dataUser.photo;
 
   //adding a post
   const handleAddPost = () => {
@@ -23,9 +28,10 @@ function Content() {
       const newPost = {
         id: currentPostId,
         text: newPostText,
-        profile: "Your Profile",   // need to be changed it to the profile that connected
+        profile: username,   // need to be changed it to the profile that connected
         date: formattedDate, 
-        img: selectedFile ? URL.createObjectURL(selectedFile) : null    
+        img: selectedFile ? URL.createObjectURL(selectedFile) : null ,
+        profileimg:profileimage
       };
       setPostList([...postsList, newPost]);
       setNewPostText('');
@@ -46,12 +52,12 @@ function Content() {
   };
 
   return(
-    <div className="content">
+    <div className="content ${isDarkMode ? 'dark-mode' : ''}">
           <div className="container-fluid">
             <div className="row">
               <LeftMenu />
-              <div className="col-7"> 
-              <div class="bg-white p-3 mt-3 rounded border shadow">              
+              <div className="col-6"> 
+              <div class="input_box p-3 mt-3 rounded border shadow">              
                 <div className="add-post-container">
                   <textarea
                     value={newPostText}
@@ -69,7 +75,8 @@ function Content() {
                 </div>
                   {
                     postsList.map((post) =>
-                    <Post key={post.id} {...post} onDelete={() => handleDeletePost(post.id)} />
+                    <Post key={post.id} {...post} onDelete={() => handleDeletePost(post.id)} isDarkMode={isDarkMode} />
+
                   )
                   }
               </div>
