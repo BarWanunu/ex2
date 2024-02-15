@@ -1,9 +1,18 @@
 import './home.css'
 import TopRuler from './TopRuler/topRuler.js';
-import React from 'react';
 import Content from './Content/content.js';
+import React, {useState, useEffect} from 'react';
 
 function Home(){
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+  useEffect(() => {
+    document.body.classList.toggle('dark-mode', isDarkMode);
+}, [isDarkMode]);
+
   return (
     <div>
       <div>
@@ -15,8 +24,10 @@ function Home(){
         <link rel="stylesheet" href="home.css" />
       </div>
       <div>
-        <TopRuler />
-        <Content />
+      <TopRuler toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
+      <Content isDarkMode={isDarkMode} />
+       
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossOrigin="anonymous"></script>
       </div>
     </div>

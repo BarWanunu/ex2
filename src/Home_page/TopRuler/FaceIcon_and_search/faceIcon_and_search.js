@@ -1,4 +1,4 @@
-function FaceIcon_and_search(){
+function FaceIcon_and_search({isDarkMode}){
   return(
     <div className="col-3 d-flex justify-content-between align-items-center"> 
     <i className="bi bi-facebook custom-facebook-icon" style={{ marginRight: '8px', color: 'blue' }}></i>

@@ -11,7 +11,7 @@ import './post.css';
 import avatarImg from './svgimg/Blank-Profile.jpg';
 
                                               //added this
-function Post({ id, text, profile, date, img, onDelete , profileimg}) {
+function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode }) {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
@@ -79,7 +79,7 @@ function Post({ id, text, profile, date, img, onDelete , profileimg}) {
   
 
   return (
-    <article className='postdesign bg-white p-4 rounded shadow mt-3'>
+    <article className={`postdesign bg-whe p-4 rounded shadow mt-3 ${isDarkMode ? 'dark-mode' : ''}`}>
       <span classname="d-flex justify-content-between">
       <div class="d-flex">
                   <img
@@ -91,7 +91,7 @@ function Post({ id, text, profile, date, img, onDelete , profileimg}) {
                   
       
         <b>{profile}&nbsp;</b>
-        <b>{profileimg}</b>
+      
         </div>
         <br />
         <time>{date}</time>

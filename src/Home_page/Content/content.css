@@ -1,0 +1,6 @@
+.input_box{
+    background-color: white;
+}
+.dark-mode .input_box{
+    background-color: rgb(227, 225, 225);
+}

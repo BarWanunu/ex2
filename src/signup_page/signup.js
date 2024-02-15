@@ -68,13 +68,17 @@ function Signup() {
             alert('Please upload a profile picture');
             return;
         }
+        const selectedPhoto = photoInput.files[0];
+        const photoURL = URL.createObjectURL(selectedPhoto);
 
-        // Assuming all validations passed, create a user object
+        
+    
+    
     const user = {
         email: emailInput.value,
         password: passwordInput.value,
         name: nameInput.value,
-        photo: photoInput.value,
+        photo: photoURL,
     };
 
     // Save user object to local storage

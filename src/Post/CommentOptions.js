@@ -3,18 +3,18 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 const CommentOptions = ({ onDelete, onEdit, initialText, setCommentText }) => {
-  const [showOptions, setShowOptions] = useState(false);
+  const [showCommentOptions, setShowCommentOptions] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editedText, setEditedText] = useState(initialText);
 
   const handleDeleteClick = () => {
-    setShowOptions(false);
+    setShowCommentOptions(false);
     setShowDeleteConfirmation(true);
   };
 
   const handleEditClick = () => {
-    setShowOptions(false);
+    setShowCommentOptions(false);
     setShowEditModal(true);
   };
 
@@ -39,9 +39,9 @@ const CommentOptions = ({ onDelete, onEdit, initialText, setCommentText }) => {
 
   return (
     <div className="comment-options">
-      <i className="bi bi-three-dots dots-comment" onClick={() => setShowOptions(!showOptions)}></i>
+      <i className="bi bi-three-dots dots-comment" onClick={() => setShowCommentOptions(!showCommentOptions)}></i>
 
-      {showOptions && (
+      {showCommentOptions && (
         <div className="options-dropdown">
           <ul className="list-group">
             <li className="list-group-item" onClick={handleDeleteClick}>Delete</li>
