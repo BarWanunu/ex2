@@ -16,7 +16,7 @@
 .dark-mode .postdesign{
     padding: 10px;
     margin: 5px;
-    background-color: rgb(214, 206, 206);
+    background-color: rgb(207, 207, 207);
     color:black;
     float:left;
     border-radius: 10px;
@@ -101,13 +101,13 @@ ul{
     margin: 15px;
   }
   .avatar_image{
-    width: 38px;
-     height:38px;
+    width: 40px;
+     height:40px;
       object-fit: cover;
   }
   .avatar_image_comment{
-    width: 20px;
-     height:20px;
+    width: 18px;
+     height:18px;
       object-fit: cover;
   }
   .options-container {
