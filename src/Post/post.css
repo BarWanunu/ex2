@@ -13,6 +13,17 @@
     position: relative;
 
 }
+.dark-mode .postdesign{
+    padding: 10px;
+    margin: 5px;
+    background-color: rgb(207, 207, 207);
+    color:black;
+    float:left;
+    border-radius: 10px;
+    width: 600px;
+    position: relative;
+
+}
 post{
     padding: 10px;
     margin: 5px;
@@ -21,6 +32,7 @@ post{
     width: 2000px;
 
 }
+
 .icons-container{
     list-style-type: none;
 
@@ -33,9 +45,10 @@ li{
      background-color: #d8d9dbb0;
     border-radius: 5px;
     width: 450px;
-    height: 35px;
+    height: 40px;
     text-align: left;
     margin-bottom: 5px;
+    padding: 10px;
 
 }
 ul{
@@ -88,8 +101,13 @@ ul{
     margin: 15px;
   }
   .avatar_image{
-    width: 15px;
-     height: 15px;
+    width: 40px;
+     height:40px;
+      object-fit: cover;
+  }
+  .avatar_image_comment{
+    width: 18px;
+     height:18px;
       object-fit: cover;
   }
   .options-container {
