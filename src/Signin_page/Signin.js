@@ -3,35 +3,48 @@ import { Link, useNavigate } from 'react-router-dom';
 import './signin.css';
 import facebook from '../Facebook_images/facebook.svg';
 import white_facebook from '../Facebook_images/white_facebook.svg';
-import { doc } from 'prettier';
 
 function Signin() {
 
   const navigate = useNavigate();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+    // setting the dark mode according to the button clicked
     const toggleDarkMode = (isDark) => {
       setIsDarkMode(isDark);
   };
-        useEffect(() => {
-            document.body.classList.toggle('dark-mode', isDarkMode);
-          }, [isDarkMode]);
+
+  // making the body dark/light mode according to isDarkMode
+    useEffect(() => {
+      document.body.classList.toggle('dark-mode', isDarkMode);
+        }, [isDarkMode]);
     
+    
+    const [isValid, setIsValid] = useState(false);
+
+    // setting is valid according to habdleSingIn and navigating to either home or signin page
+    const isValidSignIn = () => {
+      setIsValid(handleSingIn);
+      if (handleSingIn()) {
+        alert('Login Success, welcome to Facebook!');
+        navigate('/home');
+      } else {
+        alert('Incorrect username or password. Please try again.');
+        navigate('/');
+      }
+    }
+    
+    // checking if the username and password are correct (guest, Aa12345678 - hard coded for now)
     const handleSingIn = () => {
-      const user = localStorage.getItem('user');
       const displayName = document.getElementById('floatingInput').value;
       const password = document.getElementById('floatingPassword').value;
-      if (user) {
-        const dataUser = JSON.parse(user);
 
-        if (dataUser.name === displayName && dataUser.password === password) {
-          alert('Login Success, welcome to Facebook!');
-          navigate('/home');
+        if (displayName === 'guest' && password === 'Aa12345678') {
+          return true;
         } else {
-          alert('Incorrect username or password. Please try again.');
+          return false;
       } 
      } 
-    };
 
     return(
         <>
@@ -47,15 +60,16 @@ function Signin() {
   <link rel="stylesheet" href="signin.css" />
   <div className="container px-8 text-center">
     <div className="row align-items-center">
-      {/* Facebook Image on the Left */}
+      {/* Adding the facebook image according to the dark/light mode */}
       <div className="col-4">
         <img src={isDarkMode ? white_facebook : facebook} width={500} height={500} />
-        <button type="button" id="Light" className={`btn btn-light ${isDarkMode ? 'active' : ''}`} onClick={() => toggleDarkMode(false)}>Light
+        {/* Dark/Light Mode Buttons */}
+        <button type="button" id="Light" className={`btn btn-light`} onClick={() => toggleDarkMode(false)}>Light
     </button>
-    <button type="button" id="Dark" className={`btn btn-dark ${isDarkMode ? '' : 'active'}`} onClick={() => toggleDarkMode(true)}>Dark
+    <button type="button" id="Dark" className={`btn btn-dark`} onClick={() => toggleDarkMode(true)}>Dark
     </button>
       </div>
-      {/* Email/Password Form and Buttons on the Right */}
+      {/* Email and Password forms */}
       <div className="col-8 mt-5">
         <div className="row justify-content-center">
           <div className="col-8 mt-5">
@@ -67,20 +81,14 @@ function Signin() {
               <label htmlFor="floatingInput">User Name</label>
             </div>
             <div className="form-floating">
-              <input
-                type="password"
-                className="form-control"
-                id="floatingPassword"
-                placeholder="Password"
-              />
+              <input type="password" className="form-control" id="floatingPassword" placeholder="Password"/>
               <label htmlFor="floatingPassword">Password</label>
             </div>
           </div>
+          {/* Log In and Sign Up Buttons - log in goes to home page if it's valid and to sign up if pressed*/}
           <div className="col-8 mt-3">
-            <button type="submit" id="log-sign" className="btn btn-primary mb-3 mr-2" onClick={handleSingIn}>Log In</button>
-            <Link to="/signup" className="btn btn-primary mb-3">
-          Sign Up
-        </Link>
+            <button type="submit" id="log-sign" className="btn btn-primary mb-3 mr-2" onClick={isValidSignIn}>Log In</button>
+            <Link to="/signup" className="btn btn-primary mb-3">Sign Up</Link>
           </div>
           <div className="col-8 mt-3">
             <a href="#" className="link-primary">

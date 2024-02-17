@@ -7,30 +7,21 @@ import white_facebook from '../Facebook_images/white_facebook.svg'
 function Signup() { 
 
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
 
-  const getUserFromLocalStorage = () => {
-    const userJSON = localStorage.getItem('user');
-    return userJSON ? JSON.parse(userJSON) : null;
-  };
-
-    useEffect(() => {
-    // Retrieve user details when the component mounts
-    const storedUser = getUserFromLocalStorage();
-    setUser(storedUser);
-      }, []);
-
-
+    // setting the dark mode according to the button clicked
     const [isDarkMode, setIsDarkMode] = useState(false);
     const toggleDarkMode = (isDark) => {
         setIsDarkMode(isDark);
     };
+
+    // making the body dark/light mode according to isDarkMode
     useEffect(() => {
         document.body.classList.toggle('dark-mode', isDarkMode);
     }, [isDarkMode]);
 
 
        const handleSubmit = () => {
+        // Get the input values
         const emailInput = document.getElementById('exampleFormControlInput1');
         const passwordInput = document.getElementById('inputPassword5');
         const confirmPasswordInput = document.getElementById('floatingPassword');
@@ -68,23 +59,11 @@ function Signup() {
             alert('Please upload a profile picture');
             return;
         }
-
-        // Assuming all validations passed, create a user object
-    const user = {
-        email: emailInput.value,
-        password: passwordInput.value,
-        name: nameInput.value,
-        photo: photoInput.value,
-    };
-
-    // Save user object to local storage
-    localStorage.setItem('user', JSON.stringify(user));
-
-    setUser(user);
         
         // Perform additional actions or submit the form if everything is valid
         alert('Form submitted successfully!');
 
+        // Go back to Sign in page
         navigate('/');
     };
 
@@ -98,7 +77,9 @@ function Signup() {
         <link rel="stylesheet" href="signup.css" />
     <div className="container px-6 text-center">
     
+    {/* Adding the facebook image according to the dark/light mode */}
     <img src={isDarkMode ? white_facebook : facebook} width={800} height={150}/>
+    {/* Dark/Light Mode Buttons */}
     <button type="button" id="Light" className={`btn btn-light ${isDarkMode ? 'active' : ''}`} onClick={() => toggleDarkMode(false)}>
             Light
           </button>
@@ -110,6 +91,7 @@ function Signup() {
         <div className="row align-items-center">
             <div className="col middle">
                 <div className='text-center'>
+                    {/* Sign up form - with all the values required to fill */}
                 <div id="Email Address" className="form-text mb-3">
                     <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Email address" />
                     <label htmlFor="exampleFormControlInput1" className={isDarkMode ? 'form-label-dark' : 'form-label-light'}> 
