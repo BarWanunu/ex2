@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {BrowserRouter, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './signup.css';
 import facebook from '../Facebook_images/facebook.svg';
 import white_facebook from '../Facebook_images/white_facebook.svg'
@@ -60,7 +60,7 @@ function Signup() {
             return;
         }
         
-        // Perform additional actions or submit the form if everything is valid
+        // Alerting the user that all the fields are valid
         alert('Form submitted successfully!');
 
         // Go back to Sign in page
@@ -92,6 +92,7 @@ function Signup() {
             <div className="col middle">
                 <div className='text-center'>
                     {/* Sign up form - with all the values required to fill */}
+                    {/* Each field has a className to change the color according to the dark/light mode */}
                 <div id="Email Address" className="form-text mb-3">
                     <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Email address" />
                     <label htmlFor="exampleFormControlInput1" className={isDarkMode ? 'form-label-dark' : 'form-label-light'}> 

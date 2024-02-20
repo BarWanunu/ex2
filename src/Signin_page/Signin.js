@@ -62,7 +62,7 @@ function Signin() {
     <div className="row align-items-center">
       {/* Adding the facebook image according to the dark/light mode */}
       <div className="col-4">
-        <img src={isDarkMode ? white_facebook : facebook} width={500} height={500} />
+        <img src={isDarkMode ? white_facebook : facebook} className='image' />
         {/* Dark/Light Mode Buttons */}
         <button type="button" id="Light" className={`btn btn-light`} onClick={() => toggleDarkMode(false)}>Light
     </button>
