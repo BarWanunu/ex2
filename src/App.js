@@ -1,37 +1,29 @@
-import {React, useState} from 'react';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { React, useState } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import './Signin_page/signin.css';
 import Signin from './Signin_page/Signin.js';
 import Signup from './Signup_page/Signup.js';
 import Home from './Home_page/home.js';
+
 function App() {
+  const navigate = useNavigate();
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
-  const [isValid, setIsValid] = useState(false);
-  
-  const handleSingIn = () => {
-    const displayName = document.getElementById('floatingInput').value;
-    const password = document.getElementById('floatingPassword').value;
-
-      if (displayName === 'guest' && password === 'Aa12345678') {
-        setIsValid(true);
-        return true;
-      } else {
-        setIsValid(false);
-        return false;
-    } 
-   }
-
-
-      ////// fix here
-   
+  const handleSignIn = (isValid) => {
+    setIsSignedIn(isValid);
+  };
 
   return (
     <Routes>
-      <Route path="/" element={<Signin/>} />
-      <Route path="/signup" element={<Signup/>} />
-      <Route path="/home" element={handleSingIn ? <Home/> : <Signin/>} />
+      <Route
+        path="/"element={<Signin handleSignIn={handleSignIn} setIsSignedIn={setIsSignedIn}/>}/>
+      <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/home"
+        element={isSignedIn ? <Home /> : <Navigate to="/" />}
+      />
     </Routes>
   );
 }
-export default App;
 
+export default App;

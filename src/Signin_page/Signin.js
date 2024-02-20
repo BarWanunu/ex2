@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import './signin.css';
 import facebook from '../Facebook_images/facebook.svg';
 import white_facebook from '../Facebook_images/white_facebook.svg';
 
-function Signin() {
+function Signin({handleSignIn}) {
 
   const navigate = useNavigate();
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -21,30 +21,22 @@ function Signin() {
     
     
     const [isValid, setIsValid] = useState(false);
-
-    // setting is valid according to habdleSingIn and navigating to either home or signin page
-    const isValidSignIn = () => {
-      setIsValid(handleSingIn);
-      if (handleSingIn()) {
-        alert('Login Success, welcome to Facebook!');
-        navigate('/home');
-      } else {
-        alert('Incorrect username or password. Please try again.');
-        navigate('/');
-      }
-    }
     
     // checking if the username and password are correct (guest, Aa12345678 - hard coded for now)
-    const handleSingIn = () => {
+    const handleSubmit = () => {
       const displayName = document.getElementById('floatingInput').value;
       const password = document.getElementById('floatingPassword').value;
-
-        if (displayName === 'guest' && password === 'Aa12345678') {
-          return true;
-        } else {
-          return false;
-      } 
-     } 
+  
+      if (displayName === 'guest' && password === 'Aa12345678') {
+        setIsValid(true);
+        handleSignIn(true);
+        alert ('Login Success, welcome to Facebook!');
+        navigate('/home');
+      } else {
+        setIsValid(false);
+        alert('Incorrect username or password. Please try again.');
+      }
+    } 
 
     return(
         <>
@@ -87,7 +79,7 @@ function Signin() {
           </div>
           {/* Log In and Sign Up Buttons - log in goes to home page if it's valid and to sign up if pressed*/}
           <div className="col-8 mt-3">
-            <button type="submit" id="log-sign" className="btn btn-primary mb-3 mr-2" onClick={isValidSignIn}>Log In</button>
+            <button type="submit" id="log-sign" className="btn btn-primary mb-3 mr-2" onClick={handleSubmit}>Log In</button>
             <Link to="/signup" className="btn btn-primary mb-3">Sign Up</Link>
           </div>
           <div className="col-8 mt-3">
