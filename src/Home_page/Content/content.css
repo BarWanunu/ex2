@@ -4,3 +4,6 @@
 .dark-mode .input_box{
     background-color: rgb(227, 225, 225);
 }
+.logout_button{
+    float: right;
+}

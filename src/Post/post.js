@@ -19,10 +19,10 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
   const [showEditModal, setShowEditModal] = useState(false);
   const [postText, setPostText] = useState(text);
   const [showOptions, setShowOptions] = useState(false);
-  const user= localStorage.getItem('user');
-  const dataUser = JSON.parse(user);
-  const username= dataUser.name;
-  const profileimage=dataUser.photo;
+  // const user= localStorage.getItem('user');
+  // const dataUser = JSON.parse(user);
+  // const username= dataUser.name;
+  // const profileimage=dataUser.photo;
 
 
 
@@ -80,22 +80,21 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
 
   return (
     <article className={`postdesign bg-whe p-4 rounded shadow mt-3 ${isDarkMode ? 'dark-mode' : ''}`}>
-      <span classname="d-flex justify-content-between">
-      <div class="d-flex">
-                  <img
-                    src={profileimg || avatarImg}
-                    alt="avatar"
-                    className="rounded-circle me-2 avatar_image"
-                    
-                  />
-                  
+    <div className="d-flex justify-content-between">
+      <div className="d-flex">
+        <img
+          src={profileimg || avatarImg}
+          alt="avatar"
+          className="rounded-circle me-2 avatar_image"
+        />
+      <span className="profile-container">
+      <b>{profile}&nbsp;</b>
+      <time>{date}</time>
+    </span>
+
+      </div>
       
-        <b>{profile}&nbsp;</b>
-      
-        </div>
-        <br />
-        <time>{date}</time>
-      </span>
+    </div>
       <p>{postText}</p>
       {img && <img src={img} alt={`Post ${id}`} />}
       <ul className="icons-container action_list action_text">
@@ -111,11 +110,9 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
             {comments.map((comment, index) => (
                <li key={index} className='comments'>
                {comment}
-
                <div>
-                        <b>{username}&nbsp;</b>
-                        
-                        <img src={profileimage} alt={''} 
+                        <b>guest&nbsp;</b>
+                        <img src={profileimg} alt={''} 
                         className="rounded-circle me-2 avatar_image"/>
                     </div>
                <CommentOptions onDelete={() => handleDeleteComment(index)} onEdit={(editedText) => handleEditComment(index, editedText)} initialText={comment} setCommentText={() => {}} />
@@ -124,7 +121,7 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
         </ul>
         </div>
       )}
-     <PostOptions onDelete={() => onDelete(id)} onEdit={handleEdit} initialText={text} setPostText={setPostText} />
+     <PostOptions onDelete={() =>   onDelete(id)} onEdit={handleEdit} initialText={text} setPostText={setPostText} label="Post_Options" />
 
  
     </article>

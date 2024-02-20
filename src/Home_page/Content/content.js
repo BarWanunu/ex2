@@ -2,18 +2,24 @@ import { useState } from 'react';
 import Post from '../../Post/post.js';
 import posts from "../../data/postdb.json"
 import LeftMenu from './LeftMenu/leftMenu.js';
-import './content.css'
+import './content.css';
+import guest_profile from './guest_profile.jpg'
+import { Link, useNavigate } from 'react-router-dom';
 
 function Content({ isDarkMode }) {
   const [postsList, setPostList] = useState(posts);
   const [newPostText, setNewPostText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [currentPostId, setCurrentPostId] = useState(11);
-  const user= localStorage.getItem('user');
-  const dataUser = JSON.parse(user);
-  const username= dataUser.name;
-  const profileimage=dataUser.photo;
-
+  const navigate = useNavigate();
+  // const user= localStorage.getItem('user');
+  // const dataUser = JSON.parse(user);
+  // const username= dataUser.name;
+  // const profileimage=dataUser.photo;
+  const handleLogOut = () => {
+    // Navigate to the home page ("/") when logging out
+    navigate('/');
+  };
   //adding a post
   const handleAddPost = () => {
     console.log('You added a new post');
@@ -28,10 +34,10 @@ function Content({ isDarkMode }) {
       const newPost = {
         id: currentPostId,
         text: newPostText,
-        profile: username,   // need to be changed it to the profile that connected
+        profile: 'guest',   // need to be changed it to the profile that connected
         date: formattedDate, 
         img: selectedFile ? URL.createObjectURL(selectedFile) : null ,
-        profileimg:profileimage
+        profileimg:guest_profile
       };
       setPostList([...postsList, newPost]);
       setNewPostText('');
@@ -80,8 +86,8 @@ function Content({ isDarkMode }) {
                   )
                   }
               </div>
-              <div className="col-2">
-                Other stuff here?
+              <div className="col-4">
+              <Link to="/" className="btn btn-secondary mb-3 logout_button">Log Out</Link>
               </div>
             </div>
           </div>

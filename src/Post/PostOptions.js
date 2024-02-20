@@ -39,7 +39,7 @@ function PostOptions({ onDelete, onEdit, initialText, setPostText }) {
 
   return (
     <div>
-      <i className="bi bi-three-dots dots-post" onClick={() => setShowOptions(!showOptions)}></i>
+      <i className="bi bi-three-dots dots-post" onClick={() => setShowOptions(!showOptions)} label="Post_Options" data-testid="three-dots-icon" ></i>
 
       {showOptions && (
         <div className="options-dropdown">

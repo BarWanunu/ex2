@@ -1,6 +1,8 @@
 // ShareModal.js
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { ReactComponent as whatsappIcon } from './svgimg/whatsapp.svg'; // Fix the typo here
+import { ReactComponent as messengerIcon } from './svgimg/messenger.svg'; // Fix the typo here
 
 function ShareModal({ show, onClose }) {
   return (
@@ -10,7 +12,17 @@ function ShareModal({ show, onClose }) {
       </Modal.Header>
       <Modal.Body>
         {/* Add your share content here */}
-        <p>This is the share modal content.</p>
+        <ul>
+          <li>
+            <i className="bi bi-link-45deg " ></i>
+          </li>
+          <li>
+            <i class="bi bi-flag"></i>
+          </li>
+          <li>
+            <i class="bi bi-send"></i>
+          </li>
+        </ul>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>Close</Button>
