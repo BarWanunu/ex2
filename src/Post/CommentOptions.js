@@ -39,7 +39,7 @@ const CommentOptions = ({ onDelete, onEdit, initialText, setCommentText }) => {
 
   return (
     <div className="comment-options">
-      <i className="bi bi-three-dots dots-comment" onClick={() => setShowCommentOptions(!showCommentOptions)}></i>
+      <i className="bi bi-three-dots dots-comment" onClick={() => setShowCommentOptions(!showCommentOptions)}  data-testid="three-dots-icon-comment"></i>
 
       {showCommentOptions && (
         <div className="options-dropdown">
@@ -80,6 +80,7 @@ const CommentOptions = ({ onDelete, onEdit, initialText, setCommentText }) => {
             onChange={(e) => setEditedText(e.target.value)}
             rows="4"
             cols="50"
+            data-testid="comment-textarea"
           />
           <br />
           {/* Save Changes button */}

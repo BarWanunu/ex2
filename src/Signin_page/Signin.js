@@ -68,7 +68,7 @@ function Signin({handleSignIn}) {
             <div className="form-floating mb-2">
               <input type="email" className="form-control"
                 id="floatingInput"
-                placeholder="name@example.com"
+                placeholder="username"
               />
               <label htmlFor="floatingInput">User Name</label>
             </div>
