@@ -114,6 +114,24 @@ ul{
     position: relative;
     display: inline-block;
   }
+  .options-dropdown-comment ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute !important;
+    top: 46px !important; /* Adjust the top position as needed */
+    left: 30px !important; /* Adjust the right position as needed */
+    cursor: pointer;
+  }
+  
+  .options-dropdown-comment li {
+    cursor: pointer;
+    padding: 8px;
+    width: 60px;
+    &:hover {
+      background-color: #f1f1f1; 
+    }
+  }
   .options-dropdown ul {
     list-style-type: none;
     padding: 0;
@@ -127,6 +145,7 @@ ul{
   .options-dropdown li {
     cursor: pointer;
     padding: 8px;
+    width: 60px;
     &:hover {
       background-color: #f1f1f1; 
     }
@@ -171,6 +190,20 @@ ul{
 .profile-container {
   display: flex;
   flex-direction: column;
+}
+.shareMenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shareMenu li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.shareMenu li i {
+  font-size: 24px; /* Adjust the font size as needed */
 }
 
 

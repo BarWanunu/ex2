@@ -12,7 +12,7 @@ function ShareModal({ show, onClose }) {
       </Modal.Header>
       <Modal.Body>
         {/* Add your share content here */}
-        <ul>
+        <ul  class="shareMenu">
           <li>
             <i className="bi bi-link-45deg " ></i>
           </li>

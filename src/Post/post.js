@@ -112,8 +112,7 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
                {comment}
                <div>
                         <b>guest&nbsp;</b>
-                        <img src={profileimg} alt={''} 
-                        className="rounded-circle me-2 avatar_image"/>
+                        <img src={profileimg} alt={''} className="rounded-circle me-2 avatar_image" />
                     </div>
                <CommentOptions onDelete={() => handleDeleteComment(index)} onEdit={(editedText) => handleEditComment(index, editedText)} initialText={comment} setCommentText={() => {}} />
              </li>

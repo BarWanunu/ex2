@@ -42,7 +42,7 @@ const CommentOptions = ({ onDelete, onEdit, initialText, setCommentText }) => {
       <i className="bi bi-three-dots dots-comment" onClick={() => setShowCommentOptions(!showCommentOptions)}  data-testid="three-dots-icon-comment"></i>
 
       {showCommentOptions && (
-        <div className="options-dropdown">
+        <div className="options-dropdown-comment">
           <ul className="list-group">
             <li className="list-group-item" onClick={handleDeleteClick}>Delete</li>
             <li className="list-group-item" onClick={handleEditClick}>Edit</li>
