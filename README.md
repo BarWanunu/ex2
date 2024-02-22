@@ -7,7 +7,8 @@ please write the next line: git clone https://github.com/BarWanunu/ex2 cd npm in
 now you can start and see our App by writing to the termianl this line: npm start
 
 ## Our project-
-Signin page- the first page while running the app, for this part of the project we have only one user (hard coded) for siging in.
+### Signin page-
+the first page while running the app, for this part of the project we have only one user (hard coded) for siging in.
 
 
 
