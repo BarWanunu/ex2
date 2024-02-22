@@ -2,12 +2,10 @@
 
 ## Getting start-
 first of all before we will explain about our project, you need to clone the repository and also install the dependencies
-please write the next line:\n
-git clone https://github.com/BarWanunu/ex2 cd npm install
-now you can start and see our App by writing to the termianl this line:
-npm start
+please write the next line: git clone https://github.com/BarWanunu/ex2 cd npm install
+now you can start and see our App by writing to the termianl this line: npm start
 
-Our project:\n
+## Our project-
 Signin page- the first page while running the app, for this part of the project we have only one user (hard coded) for siging in.
 
 
