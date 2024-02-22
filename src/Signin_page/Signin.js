@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './signin.css';
 import facebook from '../Facebook_images/facebook.svg';
 import white_facebook from '../Facebook_images/white_facebook.svg';
@@ -20,7 +20,6 @@ function Signin({handleSignIn}) {
         }, [isDarkMode]);
     
     
-    const [isValid, setIsValid] = useState(false);
     
     // checking if the username and password are correct (guest, Aa12345678 - hard coded for now)
     const handleSubmit = () => {
@@ -28,12 +27,11 @@ function Signin({handleSignIn}) {
       const password = document.getElementById('floatingPassword').value;
   
       if (displayName === 'guest' && password === 'Aa12345678') {
-        setIsValid(true);
         handleSignIn(true);
         alert ('Login Success, welcome to Facebook!');
         navigate('/home');
       } else {
-        setIsValid(false);
+        handleSignIn(false);
         alert('Incorrect username or password. Please try again.');
       }
     } 
