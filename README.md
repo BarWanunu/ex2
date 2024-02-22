@@ -3,8 +3,9 @@
 ## How to compile and run our project
 first of all before we will explain about our project, you need to clone the repository and also install the dependencies
 
-please write the next line: <br> 
-git clone https://github.com/BarWanunu/ex2 cd npm install
+please write the next two lines: <br> 
+git clone https://github.com/BarWanunu/ex2
+npm install
 
 now you can start and see our App by writing to the termianl this line: <br> 
 npm start
