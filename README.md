@@ -1,6 +1,6 @@
 # Welcome, this is our facebook React project in BIU Advanced Programming Course
 
-Getting start-\n
+## Getting start-
 first of all before we will explain about our project, you need to clone the repository and also install the dependencies
 please write the next line:\n
 git clone https://github.com/BarWanunu/ex2 cd npm install
