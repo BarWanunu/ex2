@@ -1,1 +1,1 @@
-Second exrecise of the project - the web part. created with a react app.
+Welcome, this is our facebook React project in BIU Advanced Programming Course
