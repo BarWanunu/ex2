@@ -28,7 +28,7 @@ After you'll choose your display name for the application and the photo that wil
 Our feed page, you can see the top-ruler with the search box and the icons, the left menu with his icons, and the posts in the muddle of the feed. you can add posts with the "What's on your mind?" box and see the post that you added below the rest of the posts, you can also add picture from your computer to the post. In addition, each post can be edited or deleted. On the right you have logout button for logout to the signin page.
 
 #### Posts
-Each post has its own data: author, content, nomber of likes and comments, you can add like by presing the like button, you can add comments by pressing the comments button and right after to enter you comment and submit it. you can also delete and edit your comment.
+Each post has its own data: author, content, number of likes and comments, you can add like by presing the like button, you can add comments by pressing the comments button and right after to enter you comment and submit it. you can also delete and edit your comment.
 
 #### Dark mode
 You can switch to Dark mode and light Mode if you want, in the signin and signup pages you can to that by pressing dark or light on the top-left of the page. <br> 
