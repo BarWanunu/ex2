@@ -37,7 +37,12 @@ you can switch to Dark mode and light Mode if you want, in the signin and signup
 
 
 ## Tests
-
+we created 5 test, you can run all of them when you run npm test.we have te-
+-displays alert message for invalid email address.
+-displays alert message for log in.
+-Add a new post and check if it is displayed.
+-onDelete prop changes to true when clicking delete option.
+-Add and edit a comment in Post component.
 
 ## Our workflow
 
