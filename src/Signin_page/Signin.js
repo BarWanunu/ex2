@@ -29,6 +29,7 @@ function Signin({handleSignIn}) {
       if (displayName === 'guest' && password === 'Aa12345678') {
         handleSignIn(true);
         alert ('Login Success, welcome to Facebook!');
+        // navigate to home page if the username and password are correct - handleSignIn is updated to true for the App.js
         navigate('/home');
       } else {
         handleSignIn(false);
