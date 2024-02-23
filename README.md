@@ -35,7 +35,7 @@ You can switch to Dark mode and light Mode if you want, in the signin and signup
 In the home page you can do that by pressing on the moon icon to change the mode.
 
 ## Tests
-We created 5 tests, you can run all of them when you run npm test, then press a. we have those tests: <br>
+We created 5 tests, you can run all of them when you run npm test, then press 'a'. we have those tests: <br>
 -displays alert message for invalid email address. <br>
 -displays alert message for log in. <br>
 -Add a new post and check if it is displayed. <br>
