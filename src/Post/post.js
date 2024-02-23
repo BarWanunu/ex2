@@ -13,6 +13,7 @@ import guestprofile from './svgimg/guest_profile.jpg'
 
                                               //added this
 function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode }) {
+   // State variables for managing comments, modals, and edited text
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
@@ -27,15 +28,18 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
 
 
 
-
+// Function to handle the visibility of the comment input
   const handleCommentClick = () => {
     setShowCommentInput(!showCommentInput);
   };
 
+  // Function to handle comment submission
   const handleCommentSubmit = (newComment) => {
     
     setComments((prevComments) => [...prevComments, newComment]);
   };
+  
+  // Functions to handle comment editing and deletion
   const handleDeleteComment = (index) => {
     // Handle delete comment logic here
     const updatedComments = [...comments];
@@ -50,21 +54,23 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
     setComments(updatedComments);
   };
 
-
+  // Function to handle post editing
   const handleEdit = (editedText, setPostText) => {
     // Call setPostText to update the post text
     setPostText(editedText);
   };
 
+    // Function to close the edit modal
   const handleEditModalClose = () => {
     setShowEditModal(false);
     setEditedText(text); // Reset edited text when closing the edit modal
   };
+
   const handleOptionsClick = () => {
     setShowOptions(!showOptions);
   };
 
-
+    // Function to save changes after editing the post
 
   const handleSaveChanges = () => {
     console.log('Save Changes clicked'); // Placeholder, implement actual logic

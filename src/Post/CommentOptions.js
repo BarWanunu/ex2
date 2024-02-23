@@ -1,8 +1,11 @@
 // CommentOptions.js
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+// CommentOptions component handles options like delete and edit for a comment
 
 const CommentOptions = ({ onDelete, onEdit, initialText, setCommentText }) => {
+    // State variables to manage modal visibility and edited text
+
   const [showCommentOptions, setShowCommentOptions] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -12,6 +15,7 @@ const CommentOptions = ({ onDelete, onEdit, initialText, setCommentText }) => {
     setShowCommentOptions(false);
     setShowDeleteConfirmation(true);
   };
+  // Function to handle edit option click
 
   const handleEditClick = () => {
     setShowCommentOptions(false);
@@ -31,7 +35,7 @@ const CommentOptions = ({ onDelete, onEdit, initialText, setCommentText }) => {
     setShowEditModal(false);
     setEditedText(initialText);
   };
-
+  // Function to save changes after editing
   const handleSaveChanges = () => {
     onEdit(editedText, setCommentText); // Pass setCommentText to the onEdit function
     handleEditModalClose();

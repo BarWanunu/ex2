@@ -2,12 +2,17 @@
 import React, { useState } from 'react';
 
 const CommentInput = ({ onSubmit }) => {
+  // State variable to manage the new comment input
   const [newComment, setNewComment] = useState('');
-
+  // State variable to manage the new comment input
   const handleCommentSubmit = (e) => {
+        // Check if the new comment is not empty
     e.preventDefault();
     if (newComment.trim() !== '') {
+     // Call the parent component's onSubmit function with the new comment
+
       onSubmit(newComment);
+      
       setNewComment('');
     }
   };
