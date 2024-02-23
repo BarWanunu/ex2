@@ -20,13 +20,13 @@ password: Aa12345678
 #### Signup page
 Here the user need to fill the fields to create new user in our facebook app (for this part of the project the details of the users don't save somewhere).
 Be aware, when you fill the fields you must fill them all and you won't be able to add a user unless all fileds are filled with the appropriate requirements.
-For example - the email address you sign up with must be from the pattern of example@example.com.
+For example - the email address you sign up with must be from the pattern of name@example.com.
 For the password choosing it must be in the length of 8-20 characters and must contain letters and numbers, and must not contain spaces, special characters, or emoji.
 Afterwards, you will have to confirm your password and the values must be identical of course.
 After you'll choose your display name for the application and the photo that will be shown you'll get a massage that the form was submmited successfuly and you'll find yourself back in the sign in page.
 
 #### Home page
-Our feed page, you can see the top-ruler with the search box and the icons, the left menu with his icons, and the posts in the muddle of the feed. you can add posts with the "What's on your mind?" box, you can also add picture from your computer to the post. In addition, each post can be edited or deleted. ON the right you have log out button fot logout to the signin page.
+Our feed page, you can see the top-ruler with the search box and the icons, the left menu with his icons, and the posts in the muddle of the feed. you can add posts with the "What's on your mind?" box and see the post that you added below the rest of the posts, you can also add picture from your computer to the post. In addition, each post can be edited or deleted. On the right you have logout button for logout to the signin page.
 
 #### Posts
 Each post has its own data: author, content, nomber of likes and comments, you can add like by presing the like button, you can add comments by pressing the comments button and right after to enter you comment and submit it. you can also delete and edit your comment.
