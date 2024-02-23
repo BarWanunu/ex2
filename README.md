@@ -1,4 +1,4 @@
-# Welcome, this is our facebook React project
+# Welcome to our facebook platform for web !
 
 ## How to compile and run our projectFfirst of all before we will explain about our project, you need to clone the repository and also install the dependencies
 
