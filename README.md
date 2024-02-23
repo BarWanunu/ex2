@@ -1,6 +1,7 @@
 # Welcome to our facebook platform for web !
 
-## How to compile and run our projectFfirst of all before we will explain about our project, you need to clone the repository and also install the dependencies
+## How to compile and run our project
+Before we will explain about our project, you need to clone the repository and also install the dependencies
 
 Please write the next two lines: <br> 
 git clone https://github.com/BarWanunu/ex2 <br>
