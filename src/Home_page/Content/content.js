@@ -21,7 +21,7 @@ function Content({ isDarkMode }) {
     navigate('/');
   };
   //adding a post
-  const handleAddPost = () => {
+  const handleAddPost = async () => {
     console.log('You added a new post');
     if (newPostText.trim() !== '') {
       //sets the date
@@ -39,6 +39,24 @@ function Content({ isDarkMode }) {
         img: selectedFile ? URL.createObjectURL(selectedFile) : null ,
         profileimg:guest_profile
       };
+
+      const response = await fetch('http://localhost:8080/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newPost),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert('Post added successfully');
+      }
+      else {
+        alert('Failed to add post');
+      }
+
       setPostList([...postsList, newPost]);
       setNewPostText('');
       setSelectedFile(null);
