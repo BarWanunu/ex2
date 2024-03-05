@@ -6,7 +6,7 @@ import './content.css';
 import guest_profile from './guest_profile.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 
-function Content({ isDarkMode }) {
+function Content({ isDarkMode, token }) {
   const [postsList, setPostList] = useState(posts);
   const [newPostText, setNewPostText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -31,16 +31,17 @@ function Content({ isDarkMode }) {
       month: 'long',
       year: 'numeric'
     });
+    alert(token);
       const newPost = {
-        id: currentPostId,
+        
         text: newPostText,
-        profile: 'guest',   // need to be changed it to the profile that connected
+        token: token,   // need to be changed it to the profile that connected
         date: formattedDate, 
         img: selectedFile ? URL.createObjectURL(selectedFile) : null ,
-        profileimg:guest_profile
+        
       };
 
-      const response = await fetch('http://localhost:8080/posts', {
+      const response = await fetch('http://localhost:80/posts/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

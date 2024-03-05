@@ -19,52 +19,54 @@ function Signup() {
         document.body.classList.toggle('dark-mode', isDarkMode);
     }, [isDarkMode]);
 
-
-       const handleSubmit = () => {
+    const handleSubmit = async () => {
         // Get the input values
-        const emailInput = document.getElementById('exampleFormControlInput1');
-        const passwordInput = document.getElementById('inputPassword5');
-        const confirmPasswordInput = document.getElementById('floatingPassword');
-        const nameInput = document.getElementById('displayNameInput');
-        const photoInput = document.getElementById('photoInput');
-
-        // Check if email is in the correct format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailInput.value)) {
-            alert('Please enter a valid email address');
-            return;
+        const emailInput = document.getElementById('exampleFormControlInput1').value;
+        const passwordInput = document.getElementById('inputPassword5').value;
+        const confirmPasswordInput = document.getElementById('floatingPassword').value;
+        const nameInput = document.getElementById('displayNameInput').value;
+        const photoInput = document.getElementById('photoInput').value;
+        
+        const requestData = {
+            email: emailInput,
+            username: nameInput,
+            password: passwordInput,
+            confirmPassword: confirmPasswordInput,
+            photo: photoInput
+        };
+        
+        const response = await fetch('http://localhost:80/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add any other headers your server expects
+            },
+            body: JSON.stringify(requestData),
+        });
+    
+        const data = await response.json();
+    
+        if (data.success) {
+            // If success is true, display a success message
+            alert(data.message);
+            navigate('/');
+        } else {
+            // If success is false, display the error message
+            alert(data.message);
         }
+    
 
-        // Check if password meets the requirements
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
-        if (!passwordRegex.test(passwordInput.value)) {
-            alert('Password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.');
-            return;
-        }
-
-        // Check if password and confirm password match
-        if (passwordInput.value !== confirmPasswordInput.value) {
-            alert('Password and Confirm Password do not match');
-            return;
-        }
-
-        // Check if display name is not empty
-        if (nameInput.value == '') {
-            alert('Please enter a display name');
-            return;
-        }
-
-        // Check if photo is uploaded
-        if (photoInput.value == '') {
-            alert('Please upload a profile picture');
-            return;
-        }
+        // // Check if photo is uploaded
+        // if (photoInput.value == '') {
+        //     alert('Please upload a profile picture');
+        //     return;
+        // }
         
         // Alerting the user that all the fields are valid
-        alert('Form submitted successfully!');
+        // alert('Form submitted successfully!');
 
-        // Go back to Sign in page
-        navigate('/');
+        // // Go back to Sign in page
+        // navigate('/');
     };
 
     return(
