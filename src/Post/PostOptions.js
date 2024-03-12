@@ -1,8 +1,10 @@
 // PostOptions.js
-import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+const React = require('react');
+const { useState } = require('react');
+const { Modal, Button } = require('react-bootstrap');
 
-function PostOptions({ onDelete, onEdit, initialText, setPostText }) {
+
+function PostOptions({ onDelete, onEdit, initialText, setPostText ,token, id,profile}) {
   const [showOptions, setShowOptions] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -18,8 +20,33 @@ function PostOptions({ onDelete, onEdit, initialText, setPostText }) {
     setShowEditModal(true);
   };
 
-  const handleDeleteConfirmation = () => {
-    onDelete();
+  const handleDeleteConfirmation = async () => {
+    const token = localStorage.getItem("token");
+      // Perform a check with the server to verify authorization
+      const response = await fetch(`http://localhost/users/${profile}/posts/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Include token in the Authorization header
+        },
+      });
+      
+       
+  
+      const data = await response.json();
+      
+      if (data.success) {
+          // If authorized, proceed with the deletion
+          onDelete();
+          console.log('Delete Post Response:', data);
+
+          
+      } else {
+          // If not authorized, display an error message or handle as needed
+          console.error('Unauthorized to delete this post:', data.message);
+          alert(data.message)
+      }
+    
     setShowDeleteConfirmation(false);
   };
 
@@ -32,8 +59,35 @@ function PostOptions({ onDelete, onEdit, initialText, setPostText }) {
     setEditedText(initialText);
   };
 
-  const handleSaveChanges = () => {
-    onEdit(editedText, setPostText); // Pass setPostText to the onEdit function
+  const handleSaveChanges =  async () => {
+         // Perform a check with the server to verify authorization
+         const token = localStorage.getItem("token");
+         const response = await fetch(`http://localhost/users/${profile}/posts/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Add the Authorization header
+          },
+          body: JSON.stringify({
+            editedText
+          }),
+        });
+    
+    
+        const data = await response.json();
+        
+        if (data.success) {
+            // If authorized, proceed with the deletion
+            onEdit();
+            console.log('edit Post Response:', data);
+  
+            
+        } else {
+            // If not authorized, display an error message or handle as needed
+            console.error('Unauthorized to delete this post:', data.message);
+            alert(data.message)
+        }
+   
     handleEditModalClose();
   };
 

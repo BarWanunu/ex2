@@ -5,14 +5,34 @@ import facebook from '../Facebook_images/facebook.svg';
 import white_facebook from '../Facebook_images/white_facebook.svg'
 
 function Signup() { 
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const navigate = useNavigate();
-
+    const convertImageToBase64 = (imageFile) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(imageFile);
+      
+          reader.onload = () => {
+            resolve(reader.result);
+          };
+      
+          reader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
     // setting the dark mode according to the button clicked
     const [isDarkMode, setIsDarkMode] = useState(false);
     const toggleDarkMode = (isDark) => {
         setIsDarkMode(isDark);
     };
+      //adding a picture to the post
+  const handleFileChange = (event) => {
+    console.log('You added a picture to your post');
+    setSelectedFile(event.target.files[0]);
+  };
+
 
     // making the body dark/light mode according to isDarkMode
     useEffect(() => {
@@ -25,17 +45,17 @@ function Signup() {
         const passwordInput = document.getElementById('inputPassword5').value;
         const confirmPasswordInput = document.getElementById('floatingPassword').value;
         const nameInput = document.getElementById('displayNameInput').value;
-        const photoInput = document.getElementById('photoInput').value;
         
+        const imageData = selectedFile ? await convertImageToBase64(selectedFile) : '';
         const requestData = {
             email: emailInput,
             username: nameInput,
             password: passwordInput,
             confirmPassword: confirmPasswordInput,
-            photo: photoInput
+            photo: imageData
         };
         
-        const response = await fetch('http://localhost:80/signup', {
+        const response = await fetch('http://localhost:80/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,7 +136,7 @@ function Signup() {
                 </div>
 
                 <div className="photo-upload mb-3">
-                    <input type="file" className="form-control" id="photoInput" accept="image/*" />
+                    <input type="file"onChange={handleFileChange} className="form-control" id="photoInput" accept="image/*" />
                     <label htmlFor="photoInput" className={isDarkMode ? 'form-label-dark' : 'form-label-light'}>Choose Your Profile Picture</label>
                 </div>
                 <div className="col-auto">

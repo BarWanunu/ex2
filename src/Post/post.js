@@ -12,7 +12,7 @@ import avatarImg from './svgimg/Blank-Profile.jpg';
 import guestprofile from './svgimg/guest_profile.jpg'
 
                                               //added this
-function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode }) {
+function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileImg, isDarkMode ,token}) {
    // State variables for managing comments, modals, and edited text
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
@@ -21,6 +21,7 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
   const [showEditModal, setShowEditModal] = useState(false);
   const [postText, setPostText] = useState(text);
   const [showOptions, setShowOptions] = useState(false);
+  const [likesCount, setLikesCount] = useState(likes || 0);
   // const user= localStorage.getItem('user');
   // const dataUser = JSON.parse(user);
   // const username= dataUser.name;
@@ -83,6 +84,31 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
     
 
   };
+  const handleLikeClick = async (isLiked, postId) => {
+    console.log('LIKE',isLiked);
+    const token = localStorage.getItem("token");
+    // You can implement a function to update likes on the server
+    // For example, you can use the fetch API to send a POST request to your server
+    const response = await fetch(`http://localhost/users/${profile}/posts/${id}/like`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, 
+        // Include any other headers or authentication tokens as needed
+      },
+      body: JSON.stringify({ token, isLiked }),
+    });
+
+    const data = await response.json();
+    
+    // Update the likes count based on the server response
+    if (data.success) {
+      setLikesCount(data.likes);
+      console.log('LIKE',data.message);
+    } else {
+      // Handle error, show a message, etc.
+    }
+  };
   
 
   return (
@@ -90,13 +116,14 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
     <div className="d-flex justify-content-between">
       <div className="d-flex">
         <img
-          src={profileimg || avatarImg}
+          src={profileImg || avatarImg}
           alt="avatar"
           className="rounded-circle me-2 avatar_image"
         />
       <span className="profile-container">
       <b>{profile}&nbsp;</b>
-      <time>{date}</time>
+      <time><time>{new Date(date).toLocaleDateString()}</time></time>
+      
     </span>
 
       </div>
@@ -105,7 +132,7 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
       <p>{postText}</p>
       {img && <img src={img} alt={`Post ${id}`} />}
       <ul className="icons-container action_list action_text">
-        <LikeButton />
+      <LikeButton likes={likesCount} postId={id} onLikeClick={handleLikeClick} />
         <CommentButton onClick={handleCommentClick} />
         <ShareButton />
       </ul>
@@ -127,7 +154,7 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
         </ul>
         </div>
       )}
-     <PostOptions onDelete={() =>   onDelete(id)} onEdit={handleEdit} initialText={text} setPostText={setPostText} label="Post_Options" />
+    <PostOptions onDelete={() => onDelete(id)} onEdit={() => onEdit(id)} initialText={text} setPostText={setPostText} label="Post_Options" token={token} id={id} profile={profile} />
 
  
     </article>

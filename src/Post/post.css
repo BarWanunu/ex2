@@ -206,4 +206,19 @@ ul{
   font-size: 24px; /* Adjust the font size as needed */
 }
 
+/* LikeButton.css */
+
+.like-icon {
+  /* Default styles for the like icon (black color) */
+  fill: black;
+  transition: fill 0.3s ease;
+}
+
+.liked {
+  color: blue; /* Styles for liked state */
+}
+
+.liked2 {
+  color: blue; /* Styles for liked2 state */
+}
 

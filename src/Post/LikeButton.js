@@ -1,30 +1,25 @@
-// LikeButton.js
 import React, { useState } from 'react';
 import { ReactComponent as LikeIcon } from './svgimg/like.svg';
-// State variables to track whether the button is liked and the number of likes
-const LikeButton = ({ onClick }) => {
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
 
-    // Function to handle click on the like button
-  const handleLikeClick = () => {
-    if (liked) {
-          // Toggle the liked state and update the number of likes accordingly
-      setLikes((prevLikes) => prevLikes - 1);
-    } else {
-      setLikes((prevLikes) => prevLikes + 1);
+const LikeButton = ({ likes, postId, onLikeClick }) => {
+  const [liked, setLiked] = useState(false);
+
+  const handleLikeClick = async () => {
+    // Toggle the liked state and update the number of likes accordingly
+    setLiked(liked);
+  
+    // Call the parent component's onLikeClick function (if provided)
+    if (onLikeClick) {
+      await onLikeClick(liked, postId);
     }
-    setLiked(!liked);
-    // Call the parent component's onClick function (if provided)
-    if (onClick) {
-      onClick(!liked);
-    }
+    setLiked(!liked)
   };
+  
 
   return (
-        // List item representing the like button
+    // List item representing the like button
     <li onClick={handleLikeClick} style={{ cursor: 'pointer' }}>
-      <LikeIcon width="25" height="25" />
+      <LikeIcon width="25" height="25"  />
       <span>{likes} Like</span>
     </li>
   );

@@ -29,7 +29,7 @@ function Signin({handleSignIn}) {
   
       try {
   
-        const response = await fetch('http://localhost:80/signup/signin', {
+        const response = await fetch('http://localhost:80/users/signin', {
           method: 'POST', // or 'PATCH' depending on your API endpoint
           headers: {
             'Content-Type': 'application/json',
@@ -39,11 +39,23 @@ function Signin({handleSignIn}) {
         });
     
         const data = await response.json();
-        alert(JSON.stringify(data));
+        
         if (data.success) {
           // If success is true, display a success message
-          handleSignIn(true, data.token);
+          const response1 = await fetch('http://localhost:80/Token', {
+          method: 'POST', // or 'PATCH' depending on your API endpoint
+          headers: {
+            'Content-Type': 'application/json',
+            // Add any other headers your server expects
+          },
+          body: JSON.stringify({ username: displayName}),
+        });
+        const data1 = await response1.json();
+          handleSignIn(true, data1.token, displayName);
           alert(data.message);
+          alert(data1.token)
+          localStorage.setItem('token', data1.token)
+          localStorage.setItem('username', displayName)
           navigate('/home');
       } else {
           // If success is false, display the error message
@@ -57,19 +69,7 @@ function Signin({handleSignIn}) {
         console.error('Error sending data to the server:', error.message);
         // Handle the error (e.g., display an error message to the user)
       }
-      // if (displayName === 'guest' && password === 'Aa12345678') {
-      //   handleSignIn(true);
-      //   alert ('Login Success, welcome to Facebook!');
-      //   // navigate to home page if the username and password are correct - handleSignIn is updated to true for the App.js
-      //   // navigate('/home');
-      // } else {
-      //   handleSignIn(false);
-      //   alert('Incorrect username or password. Please try again.');
-      // }
-            
-      
-      
-      // Process data
+
     } 
 
     return(

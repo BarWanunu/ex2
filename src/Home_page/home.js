@@ -3,7 +3,7 @@ import TopRuler from './TopRuler/topRuler.js';
 import Content from './Content/content.js';
 import React, {useState, useEffect} from 'react';
 
-function Home({token}){
+function Home({token, username}){
   console.log('Token in Home:', token);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -26,7 +26,7 @@ function Home({token}){
       </div>
       <div>
       <TopRuler toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
-      <Content isDarkMode={isDarkMode}  token={token}/>
+      <Content isDarkMode={isDarkMode}  token={token} username={username}/>
        
        
         
