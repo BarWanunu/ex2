@@ -4,6 +4,7 @@ import './Signin_page/signin.css';
 import Signin from './Signin_page/Signin.js';
 import Signup from './Signup_page/Signup.js';
 import Home from './Home_page/home.js';
+import ProfileFeed from './Home_page/ProfileFeed.js';
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -23,6 +24,11 @@ function App() {
       <Route
         path="/home"
         element={isSignedIn ? <Home token={token} username={username}/> : <Navigate to="/" />}
+        
+      />
+      <Route
+        path="/home/profile"
+        element={<ProfileFeed token={token} username={username} />}
       />
     </Routes>
   );

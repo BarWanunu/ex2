@@ -10,9 +10,11 @@ import CommentOptions from './CommentOptions';
 import './post.css';
 import avatarImg from './svgimg/Blank-Profile.jpg';
 import guestprofile from './svgimg/guest_profile.jpg'
+import { Link, useNavigate } from 'react-router-dom';
+import FriendRequestModal from './FriendRequestModal';
 
                                               //added this
-function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileImg, isDarkMode ,token}) {
+function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileImg, isDarkMode ,token, friendList}) {
    // State variables for managing comments, modals, and edited text
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
@@ -22,6 +24,8 @@ function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileI
   const [postText, setPostText] = useState(text);
   const [showOptions, setShowOptions] = useState(false);
   const [likesCount, setLikesCount] = useState(likes || 0);
+  const [showFriendRequestModal, setShowFriendRequestModal] = useState(false);
+  const navigate = useNavigate();
   // const user= localStorage.getItem('user');
   // const dataUser = JSON.parse(user);
   // const username= dataUser.name;
@@ -33,6 +37,19 @@ function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileI
   const handleCommentClick = () => {
     setShowCommentInput(!showCommentInput);
   };
+  const handleProfileClick = () => {
+    console.log(friendList)
+    const myUsername = localStorage.getItem("username");
+    // Check if the profile is in the list of friends
+    if (friendList.some(friend => friend.username === profile)||profile === myUsername) {
+      // If profile is in the list of friends, navigate to the profile page
+      navigate(`/home/profile?UserID=${profile}`);
+    } else {
+      // If profile is not in the list of friends, display an alert
+      setShowFriendRequestModal(true);
+    }
+  };
+  
 
   // Function to handle comment submission
   const handleCommentSubmit = (newComment) => {
@@ -121,7 +138,7 @@ function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileI
           className="rounded-circle me-2 avatar_image"
         />
       <span className="profile-container">
-      <b>{profile}&nbsp;</b>
+      <b onClick={handleProfileClick} >{profile}&nbsp;</b>
       <time><time>{new Date(date).toLocaleDateString()}</time></time>
       
     </span>
@@ -155,7 +172,11 @@ function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileI
         </div>
       )}
     <PostOptions onDelete={() => onDelete(id)} onEdit={() => onEdit(id)} initialText={text} setPostText={setPostText} label="Post_Options" token={token} id={id} profile={profile} />
-
+    <FriendRequestModal
+        show={showFriendRequestModal}
+        onHide={() => setShowFriendRequestModal(false)}
+        profile={profile}
+      />
  
     </article>
   );

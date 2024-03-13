@@ -8,14 +8,44 @@ import './content.css';
 import guest_profile from './guest_profile.jpg'
 import { Link, json, useNavigate } from 'react-router-dom';
 
-function Content({ isDarkMode, token,username }) {
+function Profile({ isDarkMode, token,username,userId }) {
   const [postsList, setPostList] = useState([]);
   const[friendList,setFriendList]= useState([]);
-  const[friendReqList,setFriendReqList]= useState([]);
   const [newPostText, setNewPostText] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [currentPostId, setCurrentPostId] = useState(11);
   const navigate = useNavigate();
+  useEffect(() => {
+    // Fetch posts from the server when the component mounts
+    const fetchUser = async () => {
+      const token = localStorage.getItem("token");
+      console.log('Content component mounted, triggering useEffect...');
+
+   
+      const response = await fetch(`http://localhost:80/users/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, 
+          // Add any other headers if needed
+        },
+    });
+        const data = await response.json();
+        console.log('Server Response:', data);
+        
+
+        if (data.success) {
+          setPostList(data.Us);
+          console.log('Updated Posts List:', postsList);
+        } else {
+          console.error('Failed to fetch posts:', data.message);
+        }
+    
+    };
+    
+    fetchUser();
+  }, []);
+
   const convertImageToBase64 = (imageFile) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -51,7 +81,7 @@ function Content({ isDarkMode, token,username }) {
 
         if (data.success) {
           setPostList(data.posts);
-          console.log('Updated Posts List:', data.posts);
+          console.log('Updated Posts List:', postsList);
         } else {
           console.error('Failed to fetch posts:', data.message);
         }
@@ -88,38 +118,6 @@ function Content({ isDarkMode, token,username }) {
       }
    
     };
-    const fetchfriensReq = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(`http://localhost:80/users/${username}/friends/requests`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Add the Authorization header
-        },
-    });
-        const data = await response.json();
-        console.log('Server Response:', data);
-        
-
-        if (data.success) {
-          setFriendReqList(data.friends)
-          console.log('Friends  Req List:');
-          data.friends.forEach((friend, index) => {
-            console.log(`${index + 1}. ${friend}`);
-          });// Replace this with the actual array from the server
-          
-        } else {
-          console.error('Failed to fetch friends:', data.message);
-        }
-      } catch (error) {
-        console.error('Error fetching friends:', error.message);
-      }
-   
-    };
-    
-
-    fetchfriensReq();
     fetchfriens();
     fetchPosts();
   }, []);
@@ -255,14 +253,14 @@ function Content({ isDarkMode, token,username }) {
                 </div>
                   {
                     postsList.map((post) =>
-                    <Post key={post.id} {...post} onDelete={() => handleDeletePost(post.id)} onEdit={() => handleChangePost(post.id)} isDarkMode={isDarkMode}  token={token} friendList={friendList}/>
+                    <Post key={post.id} {...post} onDelete={() => handleDeletePost(post.id)} onEdit={() => handleChangePost(post.id)} isDarkMode={isDarkMode}  token={token}/>
 
                   )
                   }
               </div>
               <div className="col-4">
               <Link to="/" className="btn btn-secondary mb-3 logout_button">Log Out</Link>
-             <RightMenu friendsList={friendList} friendReqList={friendReqList} token={token}/>
+             <RightMenu friendsList={friendList} token={token}/>
               </div>
             </div>
           </div>
@@ -270,4 +268,4 @@ function Content({ isDarkMode, token,username }) {
   );
 }
 
-export default Content;
+export default Profile;

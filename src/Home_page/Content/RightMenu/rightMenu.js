@@ -6,13 +6,13 @@ import './rightMenu.css';
 
 const RightMenu = ({ friendsList }) => {
     // Check if friends is undefined or not an array
-    const [friends, setFriendList] = useState([]);
+     const [friends, setFriendList] = useState([]);
 
-    useEffect(() => {
-      // Update the state when friendsList prop changes
-      setFriendList(friendsList);
-    }, [friendsList]);
-  
+  useEffect(() => {
+    // Update the state when friendsList prop changes
+    setFriendList(friendsList);
+  }, [friendsList]);
+
     if (!friends || !Array.isArray(friends)) {
       return null; // or handle the case when friends is not available
     }
@@ -21,6 +21,7 @@ const RightMenu = ({ friendsList }) => {
     const handleDeleteFriend = async (username) => {
         try {
           const token = localStorage.getItem("token");
+          
           const response = await fetch(`http://localhost:80/users/${username}/friends`, {
             method: 'DELETE',
             headers: {
