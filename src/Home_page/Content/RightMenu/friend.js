@@ -106,8 +106,8 @@ const Friend = ({ username, profileImg, token }) => {
           <ul>
           {friendList.map((friend) => (
             <li key={friend.username}>
-              <img src={friend.photo} />
-              <span>{friend.username}</span>
+              <img src={friend.photo}         className="rounded-circle me-2 avatar_image"/>
+              <span>{friend.username}&nbsp;</span>
               
             </li>
           ))}

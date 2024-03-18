@@ -103,8 +103,8 @@ function Content({ isDarkMode, token,username }) {
         
 
         if (data.success) {
-          setFriendReqList(data.friends)
-          console.log('Friends  Req List:');
+          setFriendReqList(data.friendsRequest)
+          console.log('Friends  Req List:', friendReqList);
           data.friends.forEach((friend, index) => {
             console.log(`${index + 1}. ${friend}`);
           });// Replace this with the actual array from the server
@@ -235,7 +235,7 @@ function Content({ isDarkMode, token,username }) {
     <div className="content ${isDarkMode ? 'dark-mode' : ''}">
           <div className="container-fluid">
             <div className="row">
-              <LeftMenu />
+              <LeftMenu  friendReqList={friendReqList}/>
               <div className="col-6"> 
               <div class="input_box p-3 mt-3 rounded border shadow">              
                 <div className="add-post-container">
@@ -262,7 +262,7 @@ function Content({ isDarkMode, token,username }) {
               </div>
               <div className="col-4">
               <Link to="/" className="btn btn-secondary mb-3 logout_button">Log Out</Link>
-             <RightMenu friendsList={friendList} friendReqList={friendReqList} token={token}/>
+             <RightMenu friendsList={friendList} token={token}/>
               </div>
             </div>
           </div>

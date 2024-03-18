@@ -4,8 +4,8 @@ import React, {useState, useEffect} from 'react';
 import Profile from'./Content/profile.js'
 import { useLocation } from 'react-router-dom';
 
-function ProfileFeed({token, username}){
-  console.log('Token in Home:', token);
+function ProfileFeed({}){
+
   const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
