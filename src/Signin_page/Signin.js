@@ -15,10 +15,14 @@ function Signin({handleSignIn}) {
   };
 
   // making the body dark/light mode according to isDarkMode
-    useEffect(() => {
-      document.body.classList.toggle('dark-mode', isDarkMode);
-        }, [isDarkMode]);
-    
+  useEffect(() => {
+    document.body.classList.toggle('dark-mode', isDarkMode);
+
+    // Delete token and username from local storage when isDarkMode changes
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+}, [isDarkMode]);
+
     // checking if the username and password are correct (guest, Aa12345678 - hard coded for now)
     const handleSubmit =async  () => {
         // Process data
@@ -53,7 +57,7 @@ function Signin({handleSignIn}) {
         const data1 = await response1.json();
           handleSignIn(true, data1.token, displayName);
           alert(data.message);
-          alert(data1.token)
+          // alert(data1.token)
           localStorage.setItem('token', data1.token)
           localStorage.setItem('username', displayName)
           navigate('/home');

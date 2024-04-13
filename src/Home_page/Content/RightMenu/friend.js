@@ -24,7 +24,7 @@ const Friend = ({ username, profileImg, token }) => {
       console.log('Server Response:', data);
 
       if (data.success) {
-        navigate('/Home');
+        window.location.reload();
         console.log('Home');
 
       } else {

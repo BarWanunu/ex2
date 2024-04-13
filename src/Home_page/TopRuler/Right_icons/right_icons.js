@@ -8,6 +8,7 @@ function Right_icons({ toggleDarkMode, isDarkMode }){
   const [editedUsername, setEditedUsername] = useState('');
   const [newImage, setNewImage] = useState(null);
   const username = localStorage.getItem("username");
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
    
@@ -43,7 +44,13 @@ function Right_icons({ toggleDarkMode, isDarkMode }){
     };
     fetchUser();
   }, []);
-  const handleDeleteClick = async () => {
+  
+  const handleDeleteClick = () => {
+    console.log("handle Delete")
+    setShowDeleteConfirmation(true);
+  };
+
+  const handleConfirmDelete  = async () => {
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");
       // Perform a check with the server to verify authorization
@@ -60,6 +67,7 @@ function Right_icons({ toggleDarkMode, isDarkMode }){
       if (data.success) {
           // If authorized, proceed with the deletion
           console.log('Delete user Response:', data);
+          setShowDeleteConfirmation(false);
           navigate('/');
 
           
@@ -69,6 +77,9 @@ function Right_icons({ toggleDarkMode, isDarkMode }){
           alert(data.message)
       }
     
+  };
+  const handleCancelDelete = () => {
+    setShowDeleteConfirmation(false); // Close the confirmation modal without deletion
   };
   const handleEditClick = () => {
     setEditedUsername(username);
@@ -164,6 +175,21 @@ function Right_icons({ toggleDarkMode, isDarkMode }){
           )}
         </div>
       </div>
+
+      {/* UserEditModal component */}
+      {/* Confirmation modal for delete */}
+      {showDeleteConfirmation && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Confirmation</h2>
+            <p>Are you sure you want to delete your account?</p>
+            <div>
+              <button onClick={handleConfirmDelete}>Yes</button>
+              <button onClick={handleCancelDelete}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* UserEditModal component */}
       {showEditModal && (

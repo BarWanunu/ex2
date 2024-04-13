@@ -185,6 +185,7 @@ function Content({ isDarkMode, token,username }) {
   //delete a post
   const handleDeletePost = async(postId) => {
     const token = localStorage.getItem("token");
+    console.log(token);
     const updatedResponse = await fetch('http://localhost:80/posts', {
       method: 'GET',
       headers: {
@@ -199,6 +200,7 @@ function Content({ isDarkMode, token,username }) {
       // Update the client-side state with the updated posts
       setPostList(updatedData.posts);
       console.log('Deleted Post:', postId);
+      window.location.reload();
     }
   };
   const handleChangePost = async (postId, editedText) => {
@@ -227,6 +229,8 @@ function Content({ isDarkMode, token,username }) {
         setPostList(updatedPostList);
 
         console.log('Edited Post:', editedPostIndex);
+        window.location.reload();
+
     }
   }
   };

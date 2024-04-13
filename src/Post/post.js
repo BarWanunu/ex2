@@ -1,5 +1,5 @@
 // Post.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LikeButton from './LikeButton';
 import CommentInput from './CommentInput';
 import CommentButton from './CommentButton';
@@ -26,11 +26,46 @@ function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileI
   const [likesCount, setLikesCount] = useState(likes || 0);
   const [showFriendRequestModal, setShowFriendRequestModal] = useState(false);
   const navigate = useNavigate();
-  // const user= localStorage.getItem('user');
+  const username= localStorage.getItem('username');
+  const [userProfileImage, setUserProfileImage] = useState('');
   // const dataUser = JSON.parse(user);
   // const username= dataUser.name;
   // const profileimage=dataUser.photo;
 
+
+  useEffect(() => {
+    // Fetch user profile image when the component mounts
+    async function fetchUserProfileImage() {
+    
+        try {
+          const token = localStorage.getItem("token");
+          const response = await fetch(`http://localhost:80/users/${username}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Add the Authorization header
+          },
+      });
+          const data = await response.json();
+          console.log('Server Response:', data);
+          
+  
+          if (data.success) {
+            // alert(data.user.photo)
+            setUserProfileImage(data.user.photo)
+           
+          } else {
+            console.error('Failed to fetch user:', data.message);
+          }
+        } catch (error) {
+          console.error('Error fetching user:', error.message);
+        }
+     
+      };
+    
+
+    fetchUserProfileImage(); // Call the fetchUserProfileImage function
+}, [profile]); // Call useEffect only when the profile username changes
 
 
 // Function to handle the visibility of the comment input
@@ -162,8 +197,8 @@ function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileI
                <li key={index} className='comments'>
                {comment}
                <div>
-                        <b>guest&nbsp;</b>
-                        <img src={guestprofile} alt={''} className="rounded-circle me-2 avatar_image" />
+                        <b>{username}&nbsp;</b>
+                        <img src={userProfileImage} alt={''} className="rounded-circle me-2 avatar_image" />
                     </div>
                <CommentOptions onDelete={() => handleDeleteComment(index)} onEdit={(editedText) => handleEditComment(index, editedText)} initialText={comment} setCommentText={() => {}} />
              </li>
