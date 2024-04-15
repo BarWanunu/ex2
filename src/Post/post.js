@@ -206,8 +206,10 @@ function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileI
         </ul>
         </div>
       )}
-    <PostOptions onDelete={() => onDelete(id)} onEdit={() => onEdit(id)} initialText={text} setPostText={setPostText} label="Post_Options" token={token} id={id} profile={profile} />
-    <FriendRequestModal
+  {/* Render post options only if the username matches the profile */}
+  {username === profile && (
+      <PostOptions onDelete={() => onDelete(id)} onEdit={() => onEdit(id)} initialText={text} setPostText={setPostText} label="Post_Options" token={token} id={id} profile={profile} />
+    )}    <FriendRequestModal
         show={showFriendRequestModal}
         onHide={() => setShowFriendRequestModal(false)}
         profile={profile}

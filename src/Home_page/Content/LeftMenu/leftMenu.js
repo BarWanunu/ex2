@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LeftMenu({ friendReqList }) {
   const [showFriendReqModal, setShowFriendReqModal] = useState(false);
   const [friendsReq, setFriendList] = useState([]);
-
+  const navigate = useNavigate();
+  const username= localStorage.getItem('username');
   useEffect(() => {
     // Update the state when friendsList prop changes
     // console.log("hi", friendReqList)
@@ -35,7 +37,13 @@ function LeftMenu({ friendReqList }) {
     alert(data.message)
     setShowFriendReqModal(false);
     fetchfriensReq();
+    window.location.reload();
 
+  };
+  // Function to handle clicking on the Profile option
+  const handleProfileClick = () => {
+    // Navigate to the profile page with the current user's ID
+    navigate(`/home/profile?UserID=${username}`);
   };
 
   
@@ -67,15 +75,16 @@ function LeftMenu({ friendReqList }) {
     } catch (error) {
       console.error('Error fetching friends:', error.message);
     }
+  
  
   };
   
   return (
     <div className="col-2">
       <ul className="list-group list-group-flush">
-        <li className="list-group-item custom-left-menu">
+      <li className="list-group-item custom-left-menu" onClick={handleProfileClick}>
           <i className="bi bi-person-circle" style={{ marginRight: '8px'}}></i>
-          Profile Name
+          Profile 
         </li>
         <li className="list-group-item custom-left-menu" onClick={handleFriendReqClick}>
           <i className="bi bi-people-fill" style={{ marginRight: '8px'}}></i>

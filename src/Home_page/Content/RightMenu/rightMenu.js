@@ -37,6 +37,7 @@ const RightMenu = ({ friendsList }) => {
             console.log('Friends List:');
             data.friends.forEach((friend, index) => {
               console.log(`${index + 1}. ${friend}`);
+              window.location.reload();
             }); // Replace this with the actual array from the server
           } else {
             console.error('Failed to fetch friends:', data.message);

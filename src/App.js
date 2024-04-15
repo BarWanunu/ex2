@@ -41,9 +41,10 @@ function App() {
         element={isSignedIn ? <Home token={token} username={username} onSignOut={handleSignOut} /> : <Navigate to="/" />}
       />
       <Route
-        path="/home/profile"
-        element={<ProfileFeed token={token} username={username} />}
-      />
+      path="/home/profile"
+      element={isSignedIn ? <ProfileFeed token={token} username={username} /> : <Navigate to="/" />}
+    />
+
     </Routes>
   );
 }

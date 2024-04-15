@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { Link, json, useNavigate } from 'react-router-dom';
 import UserEditModal from './UserEditModal'; 
+const { Modal, Button } = require('react-bootstrap');
+
 function Right_icons({ toggleDarkMode, isDarkMode }){
   let [profile, setProfile] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
@@ -46,8 +48,10 @@ function Right_icons({ toggleDarkMode, isDarkMode }){
   }, []);
   
   const handleDeleteClick = () => {
-    console.log("handle Delete")
+    setShowOptions(false);
     setShowDeleteConfirmation(true);
+    console.log(showDeleteConfirmation)
+
   };
 
   const handleConfirmDelete  = async () => {
@@ -124,6 +128,7 @@ function Right_icons({ toggleDarkMode, isDarkMode }){
           // If authorized, proceed with the deletion
           console.log('Edit User', data);
           setProfile(data.profile)
+          window.location.reload();
           
 
           
@@ -175,21 +180,24 @@ function Right_icons({ toggleDarkMode, isDarkMode }){
           )}
         </div>
       </div>
+ {/* Modal for delete confirmation */}
+ <Modal show={showDeleteConfirmation} onHide={handleCancelDelete} size="sm">
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this comment?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCancelDelete}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
-      {/* UserEditModal component */}
-      {/* Confirmation modal for delete */}
-      {showDeleteConfirmation && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Confirmation</h2>
-            <p>Are you sure you want to delete your account?</p>
-            <div>
-              <button onClick={handleConfirmDelete}>Yes</button>
-              <button onClick={handleCancelDelete}>No</button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* UserEditModal component */}
       {showEditModal && (

@@ -157,7 +157,8 @@ function Profile({ isDarkMode, token,username,userId }) {
               <LeftMenu />
               <div className="col-6"> 
               <div class="input_box p-3 mt-3 rounded border shadow">              
-               <img src={userProfile} alt={userId} />
+              <img src={userProfile} alt={userId} style={{ width: '300px' }} />
+
                <h1>{userId}</h1>
                 </div>
                   {
