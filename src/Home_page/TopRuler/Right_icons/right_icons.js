@@ -128,6 +128,28 @@ function Right_icons({ toggleDarkMode, isDarkMode }){
           // If authorized, proceed with the deletion
           console.log('Edit User', data);
           setProfile(data.profile)
+          if (username !== editedUsername) {
+            // Request a new token from the server
+            const response1 = await fetch('http://localhost:80/Token', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                // Add any other headers your server expects
+              },
+              body: JSON.stringify({ username: editedUsername }),
+            });
+      
+            const newData = await response1.json();
+      
+            if (newData.success) {
+              // Save the new token to local storage
+              localStorage.setItem('token', newData.token)
+              localStorage.setItem('username', editedUsername)
+              console.log('New token saved to local storage:', newData.token);
+            } else {
+              console.error('Failed to get new token:', newData.message);
+            }
+          }
           window.location.reload();
           
 

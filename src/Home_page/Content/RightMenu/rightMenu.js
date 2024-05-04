@@ -52,8 +52,9 @@ const RightMenu = ({ friendsList }) => {
         <h4>My Friends</h4>
         <div className="d-flex justify-content-between align-items-center">
           {friends.map((friend) => (
-            <Friend key={friend.username} onDelete={() => handleDeleteFriend(friend.username)} username={friend.username} profileImg={friend.photo} />
-          ))}
+            <div key={friend.username}>
+            <Friend onDelete={() => handleDeleteFriend(friend.username)} username={friend.username} profileImg={friend.photo} />
+          </div>          ))}
         </div>
       </div>
     );

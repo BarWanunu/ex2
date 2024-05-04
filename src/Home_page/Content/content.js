@@ -49,8 +49,8 @@ function Content({ isDarkMode, token,username }) {
         console.log('Server Response:', data);
         
 
-        if (data.success) {
-          setPostList(data.posts);
+        if (response.ok) {
+          setPostList(data);
           console.log('Updated Posts List:', data.posts);
         } else {
           console.error('Failed to fetch posts:', data.message);
@@ -158,14 +158,15 @@ function Content({ isDarkMode, token,username }) {
       });
 
       const data = await response.json();
-
+      console.log(data);
       if (data.success) {
         alert('Post added successfully');
         setPostList(prevPostsList => [...prevPostsList, data.post]);
+        window.location.reload();
       }
     
       else {
-        alert('Failed to add post');
+        alert(data.message);
       }
 
       

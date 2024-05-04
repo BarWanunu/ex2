@@ -58,10 +58,9 @@ function Profile({ isDarkMode, token,username,userId }) {
     });
         const data = await response.json();
         console.log('Server Response:', data);
-        
-        if (data.success) {
-          setPostList(data.post);
-          console.log('Updated Posts List:', postsList);
+        if (response.ok) {
+          setPostList(data);
+          console.log('Updated Posts List:', data.posts);
         } else {
           console.error('Failed to fetch posts:', data.message);
         }
@@ -118,7 +117,9 @@ function Profile({ isDarkMode, token,username,userId }) {
       // Update the client-side state with the updated posts
       setPostList(updatedData.posts);
       console.log('Deleted Post:', postId);
+      window.location.reload();
     }
+    
   };
   const handleChangePost = async (postId, editedText) => {
     const token = localStorage.getItem("token");
@@ -146,6 +147,7 @@ function Profile({ isDarkMode, token,username,userId }) {
         setPostList(updatedPostList);
 
         console.log('Edited Post:', editedPostIndex);
+        window.location.reload();
     }
   }
   };

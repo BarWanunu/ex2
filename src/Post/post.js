@@ -148,7 +148,7 @@ function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileI
         'Authorization': `Bearer ${token}`, 
         // Include any other headers or authentication tokens as needed
       },
-      body: JSON.stringify({ token, isLiked }),
+      body: JSON.stringify({isLiked }),
     });
 
     const data = await response.json();

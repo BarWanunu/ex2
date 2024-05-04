@@ -45,6 +45,21 @@ function LeftMenu({ friendReqList }) {
     // Navigate to the profile page with the current user's ID
     navigate(`/home/profile?UserID=${username}`);
   };
+  const handleRejectFriend = async (friendUsername) => {
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+    const response = await fetch(`http://localhost:80/users/${username}/friends/requests/${friendUsername}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    alert(data.message);
+    setShowFriendReqModal(false);
+    fetchfriensReq();
+  };
 
   
   const fetchfriensReq = async () => {
@@ -123,7 +138,8 @@ function LeftMenu({ friendReqList }) {
         </div>
         <div>
           <button className="btn btn-success me-2" onClick={() => handleApproveFriend(friend.username)}>Approve</button>
-          
+          <button className="btn btn-danger" onClick={() => handleRejectFriend(friend.username)}>Reject</button>
+
         </div>
       </li>
     ))}
