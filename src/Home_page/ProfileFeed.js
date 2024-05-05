@@ -1,12 +1,15 @@
 import './home.css'
 import TopRuler from './TopRuler/topRuler.js';
-import Content from './Content/content.js';
 import React, {useState, useEffect} from 'react';
+import Profile from'./Content/profile.js'
+import { useLocation } from 'react-router-dom';
 
-function Home({token, username}){
-  console.log('Token in Home:', token);
+function ProfileFeed({}){
+
   const [isDarkMode, setIsDarkMode] = useState(false);
-
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const userId = searchParams.get('UserID');
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
@@ -26,7 +29,7 @@ function Home({token, username}){
       </div>
       <div>
       <TopRuler toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
-      <Content isDarkMode={isDarkMode}  token={token} username={username}/>
+      <Profile isDarkMode={isDarkMode}  userId={userId} />
        
        
         
@@ -36,4 +39,4 @@ function Home({token, username}){
   );
 }
 
-export default Home;
+export default ProfileFeed;

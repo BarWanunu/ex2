@@ -1,0 +1,38 @@
+.avatar_image{
+    width: 30px;
+     height:30px;
+      object-fit: cover;
+  }
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .options-dropdown-friends ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 100px;
+    cursor: pointer;
+  }
+  .options-dropdown-friends li {
+    cursor: pointer;
+    padding: 8px;
+    width: 60px;
+    &:hover {
+      background-color: #f1f1f1; 
+    }
+  }
+  .friendsdesign{
+    padding: 10px;
+    margin: 5px;
+    background-color: white;
+    color:black;
+    float:left;
+    border-radius: 10px;
+    height: 50;
+    position: relative;
+
+}

@@ -5,66 +5,88 @@ import facebook from '../Facebook_images/facebook.svg';
 import white_facebook from '../Facebook_images/white_facebook.svg'
 
 function Signup() { 
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const navigate = useNavigate();
-
+    const convertImageToBase64 = (imageFile) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(imageFile);
+      
+          reader.onload = () => {
+            resolve(reader.result);
+          };
+      
+          reader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
     // setting the dark mode according to the button clicked
     const [isDarkMode, setIsDarkMode] = useState(false);
     const toggleDarkMode = (isDark) => {
         setIsDarkMode(isDark);
     };
+      //adding a picture to the post
+  const handleFileChange = (event) => {
+    console.log('You added a picture to your post');
+    setSelectedFile(event.target.files[0]);
+  };
+
 
     // making the body dark/light mode according to isDarkMode
     useEffect(() => {
         document.body.classList.toggle('dark-mode', isDarkMode);
     }, [isDarkMode]);
 
-
-       const handleSubmit = () => {
+    const handleSubmit = async () => {
         // Get the input values
-        const emailInput = document.getElementById('exampleFormControlInput1');
-        const passwordInput = document.getElementById('inputPassword5');
-        const confirmPasswordInput = document.getElementById('floatingPassword');
-        const nameInput = document.getElementById('displayNameInput');
-        const photoInput = document.getElementById('photoInput');
-
-        // Check if email is in the correct format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailInput.value)) {
-            alert('Please enter a valid email address');
-            return;
+        const emailInput = document.getElementById('exampleFormControlInput1').value;
+        const passwordInput = document.getElementById('inputPassword5').value;
+        const confirmPasswordInput = document.getElementById('floatingPassword').value;
+        const nameInput = document.getElementById('displayNameInput').value;
+        
+        const imageData = selectedFile ? await convertImageToBase64(selectedFile) : '';
+        const requestData = {
+            email: emailInput,
+            username: nameInput,
+            password: passwordInput,
+            confirmPassword: confirmPasswordInput,
+            photo: imageData
+        };
+        
+        const response = await fetch('http://localhost:80/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add any other headers your server expects
+            },
+            body: JSON.stringify(requestData),
+        });
+    
+        const data = await response.json();
+    
+        if (data.success) {
+            // If success is true, display a success message
+            alert(data.message);
+            navigate('/');
+        } else {
+            // If success is false, display the error message
+            alert(data.message);
         }
+    
 
-        // Check if password meets the requirements
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
-        if (!passwordRegex.test(passwordInput.value)) {
-            alert('Password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.');
-            return;
-        }
-
-        // Check if password and confirm password match
-        if (passwordInput.value !== confirmPasswordInput.value) {
-            alert('Password and Confirm Password do not match');
-            return;
-        }
-
-        // Check if display name is not empty
-        if (nameInput.value == '') {
-            alert('Please enter a display name');
-            return;
-        }
-
-        // Check if photo is uploaded
-        if (photoInput.value == '') {
-            alert('Please upload a profile picture');
-            return;
-        }
+        // // Check if photo is uploaded
+        // if (photoInput.value == '') {
+        //     alert('Please upload a profile picture');
+        //     return;
+        // }
         
         // Alerting the user that all the fields are valid
-        alert('Form submitted successfully!');
+        // alert('Form submitted successfully!');
 
-        // Go back to Sign in page
-        navigate('/');
+        // // Go back to Sign in page
+        // navigate('/');
     };
 
     return(
@@ -114,7 +136,7 @@ function Signup() {
                 </div>
 
                 <div className="photo-upload mb-3">
-                    <input type="file" className="form-control" id="photoInput" accept="image/*" />
+                    <input type="file"onChange={handleFileChange} className="form-control" id="photoInput" accept="image/*" />
                     <label htmlFor="photoInput" className={isDarkMode ? 'form-label-dark' : 'form-label-light'}>Choose Your Profile Picture</label>
                 </div>
                 <div className="col-auto">

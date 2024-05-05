@@ -1,5 +1,5 @@
 // Post.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LikeButton from './LikeButton';
 import CommentInput from './CommentInput';
 import CommentButton from './CommentButton';
@@ -10,9 +10,11 @@ import CommentOptions from './CommentOptions';
 import './post.css';
 import avatarImg from './svgimg/Blank-Profile.jpg';
 import guestprofile from './svgimg/guest_profile.jpg'
+import { Link, useNavigate } from 'react-router-dom';
+import FriendRequestModal from './FriendRequestModal';
 
                                               //added this
-function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode }) {
+function Post({ id, text, profile, date, img, likes, onDelete , onEdit, profileImg, isDarkMode ,token, friendList}) {
    // State variables for managing comments, modals, and edited text
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comments, setComments] = useState([]);
@@ -21,17 +23,68 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
   const [showEditModal, setShowEditModal] = useState(false);
   const [postText, setPostText] = useState(text);
   const [showOptions, setShowOptions] = useState(false);
-  // const user= localStorage.getItem('user');
+  const [likesCount, setLikesCount] = useState(likes || 0);
+  const [showFriendRequestModal, setShowFriendRequestModal] = useState(false);
+  const navigate = useNavigate();
+  const username= localStorage.getItem('username');
+  const [userProfileImage, setUserProfileImage] = useState('');
   // const dataUser = JSON.parse(user);
   // const username= dataUser.name;
   // const profileimage=dataUser.photo;
 
+
+  useEffect(() => {
+    // Fetch user profile image when the component mounts
+    async function fetchUserProfileImage() {
+    
+        try {
+          const token = localStorage.getItem("token");
+          const response = await fetch(`http://localhost:80/users/${username}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Add the Authorization header
+          },
+      });
+          const data = await response.json();
+          console.log('Server Response:', data);
+          
+  
+          if (data.success) {
+            // alert(data.user.photo)
+            setUserProfileImage(data.user.photo)
+           
+          } else {
+            console.error('Failed to fetch user:', data.message);
+          }
+        } catch (error) {
+          console.error('Error fetching user:', error.message);
+        }
+     
+      };
+    
+
+    fetchUserProfileImage(); // Call the fetchUserProfileImage function
+}, [profile]); // Call useEffect only when the profile username changes
 
 
 // Function to handle the visibility of the comment input
   const handleCommentClick = () => {
     setShowCommentInput(!showCommentInput);
   };
+  const handleProfileClick = () => {
+    console.log(friendList)
+    const myUsername = localStorage.getItem("username");
+    // Check if the profile is in the list of friends
+    if (friendList.some(friend => friend.username === profile)||profile === myUsername) {
+      // If profile is in the list of friends, navigate to the profile page
+      navigate(`/home/profile?UserID=${profile}`);
+    } else {
+      // If profile is not in the list of friends, display an alert
+      setShowFriendRequestModal(true);
+    }
+  };
+  
 
   // Function to handle comment submission
   const handleCommentSubmit = (newComment) => {
@@ -83,6 +136,31 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
     
 
   };
+  const handleLikeClick = async (isLiked, postId) => {
+    console.log('LIKE',isLiked);
+    const token = localStorage.getItem("token");
+    // You can implement a function to update likes on the server
+    // For example, you can use the fetch API to send a POST request to your server
+    const response = await fetch(`http://localhost/users/${profile}/posts/${id}/like`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, 
+        // Include any other headers or authentication tokens as needed
+      },
+      body: JSON.stringify({isLiked }),
+    });
+
+    const data = await response.json();
+    
+    // Update the likes count based on the server response
+    if (data.success) {
+      setLikesCount(data.likes);
+      console.log('LIKE',data.message);
+    } else {
+      // Handle error, show a message, etc.
+    }
+  };
   
 
   return (
@@ -90,13 +168,14 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
     <div className="d-flex justify-content-between">
       <div className="d-flex">
         <img
-          src={profileimg || avatarImg}
+          src={profileImg || avatarImg}
           alt="avatar"
           className="rounded-circle me-2 avatar_image"
         />
       <span className="profile-container">
-      <b>{profile}&nbsp;</b>
-      <time>{date}</time>
+      <b onClick={handleProfileClick} >{profile}&nbsp;</b>
+      <time><time>{new Date(date).toLocaleDateString()}</time></time>
+      
     </span>
 
       </div>
@@ -105,7 +184,7 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
       <p>{postText}</p>
       {img && <img src={img} alt={`Post ${id}`} />}
       <ul className="icons-container action_list action_text">
-        <LikeButton />
+      <LikeButton likes={likesCount} postId={id} onLikeClick={handleLikeClick} />
         <CommentButton onClick={handleCommentClick} />
         <ShareButton />
       </ul>
@@ -118,8 +197,8 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
                <li key={index} className='comments'>
                {comment}
                <div>
-                        <b>guest&nbsp;</b>
-                        <img src={guestprofile} alt={''} className="rounded-circle me-2 avatar_image" />
+                        <b>{username}&nbsp;</b>
+                        <img src={userProfileImage} alt={''} className="rounded-circle me-2 avatar_image" />
                     </div>
                <CommentOptions onDelete={() => handleDeleteComment(index)} onEdit={(editedText) => handleEditComment(index, editedText)} initialText={comment} setCommentText={() => {}} />
              </li>
@@ -127,8 +206,14 @@ function Post({ id, text, profile, date, img, onDelete , profileimg, isDarkMode 
         </ul>
         </div>
       )}
-     <PostOptions onDelete={() =>   onDelete(id)} onEdit={handleEdit} initialText={text} setPostText={setPostText} label="Post_Options" />
-
+  {/* Render post options only if the username matches the profile */}
+  {username === profile && (
+      <PostOptions onDelete={() => onDelete(id)} onEdit={() => onEdit(id)} initialText={text} setPostText={setPostText} label="Post_Options" token={token} id={id} profile={profile} />
+    )}    <FriendRequestModal
+        show={showFriendRequestModal}
+        onHide={() => setShowFriendRequestModal(false)}
+        profile={profile}
+      />
  
     </article>
   );
