@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './Signin_page/signin.css';
 import Signin from './Signin_page/Signin.js';
-import Signup from './Signup_page/Signup.js';
+import Signup from './signup_page/signup.js';
 import Home from './Home_page/home.js';
 import ProfileFeed from './Home_page/ProfileFeed.js';
 
