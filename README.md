@@ -4,7 +4,7 @@
 Before we will explain about our project, you need to clone the repository and also install the dependencies
 
 Please write the next two lines: <br> 
-git clone https://github.com/BarWanunu/ex2 <br>
+git clone https://github.com/BarWanunu/ex2/tree/branch_ex3_react <br>
 npm install
 
 Now you can start and see our App by writing to the termianl this line: <br> 
